@@ -1,0 +1,46 @@
+# docker-compose up --build frontend
+# docker-compose up --build backend
+# docker-compose up --build mysql
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+  
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=P@ssw0rd1234!5678
+      - DB_NAME=rider_essentials
+      - SMTP_TEST_EMAIL=dani.flex.personal@gmail.com
+      - SMTP_HOST=smtp.dondominio.com
+      - SMTP_PORT=587
+      - SMTP_SECURE=false
+      - SMTP_USER=rider@siempreigual.es
+      - SMTP_PASSWORD=1J7e$8845o32./
+    depends_on:
+      - mysql
+  
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: P@ssw0rd1234!5678
+      MYSQL_DATABASE: rider_essentials
+    ports:
+      - "3306:3306"
+    volumes:
+      #- mysql-data:/var/lib/mysql
+      - ./scripts:/docker-entrypoint-initdb.d
+
+volumes:
+  mysql-data:

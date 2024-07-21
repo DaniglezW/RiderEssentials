@@ -1,13 +1,20 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CatalogComponent } from './components/catalog/catalog.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  imports: [CatalogComponent],
+  standalone: true
 })
 export class AppComponent {
-  title = 'frontend';
+  // constructor(private translate: TranslateService) {
+  //   this.translate.addLangs(['en', 'es', 'pt', 'ca']);
+  //   this.translate.setDefaultLang('es');
+
+  //   const browserLang = this.translate.getBrowserLang();
+  //   const langToUse = browserLang?.match(/en|es|pt|ca/) ? browserLang : 'es';
+  //   this.translate.use(langToUse);
+  // }
 }

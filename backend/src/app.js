@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const pool = require('./config/db'); // Importar el pool desde db.js
+const pool = require('./config/db');
 
 const app = express();
 
@@ -28,5 +28,6 @@ app.use((req, res, next) => {
 // Importar y usar las rutas
 const apiRoutes = require('./routes');
 app.use('/api', apiRoutes);
+app.use('/uploads', express.static('uploads')); 
 
 module.exports = app;

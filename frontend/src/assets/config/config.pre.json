@@ -1,0 +1,10 @@
+{
+  "authUrl": "https://sicabem-int.aiguesdebarcelona.cat/api/security/v1/token/me",
+  "lecturaFacturacionBack": "sicab-lectura-facturacion-back",
+  "lecturaFacturacionRica": "https://sicabem-int.aiguesdebarcelona.cat/lectura-facturacion/api/v1",
+  "transversal": "https://sicabem-int.aiguesdebarcelona.cat/transversal",
+  "mdmUrl": "http://srvmdmwebint02.agbar.ga.local:8080/MDM/",
+  "googleMapsUrl": "https://maps.google.com/maps?hl=es&q={0},{1}",
+  "lecfaccodis":"https://sicabem-int.aiguesdebarcelona.cat/lectura-facturacion/api/v1/codificacions",
+  "lecFacSubConRep":"https://sicabem-int.aiguesdebarcelona.cat/lectura-facturacion/api/v1"
+}

@@ -1,0 +1,8 @@
+{
+  "authUrl": "https://sicabem.aiguesdebarcelona.cat/api/security/v1/token/me",
+  "lecturaFacturacionBack": "sicab-lectura-facturacion-back",
+  "lecturaFacturacionRica": "https://sicabem.aiguesdebarcelona.cat/lectura-facturacion/api/v1",
+  "transversal": "https://sicabem.aiguesdebarcelona.cat/transversal",
+  "mdmUrl": "https://webtelelectura.aiguesdebarcelona.cat/",
+  "googleMapsUrl": "https://maps.google.com/maps?hl=es&q={0},{1}"
+}

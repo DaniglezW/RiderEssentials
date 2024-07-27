@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CatalogComponent } from './components/catalog/catalog.component';
 import { RouterModule, Routes } from '@angular/router';
+import { LayoutComponent } from './modules/layout/layout.component';
 
 const routes: Routes = [
-  { path: 'catalog', component: CatalogComponent },
   { path: '', redirectTo: '/catalog', pathMatch: 'full' },
-  { path: '**', redirectTo: '/catalog' }
+  {
+    path: 'catalog',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./modules/catalog/catalog.module').then(
+        (m) => m.CatalogModule
+      ),
+  }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

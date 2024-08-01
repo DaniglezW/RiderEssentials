@@ -65,6 +65,16 @@
         i {
             margin: 0 10px;
         }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+
+            &:hover {
+                color: #ccc;
+            }
+        }
     }
 
     .payment-methods {

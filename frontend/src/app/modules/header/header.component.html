@@ -1,17 +1,23 @@
 <header>
     <div class="top-bar">
-        <span class="contact">Contacto : contact&#64;rider-essentials.com</span>
-        <span class="brand">Rider Essentials &copy;</span>
-        
+        <span class="contact">{{ 'HEADER.CONTACT' | translate }} : contact&#64;rider-essentials.com</span>
+        <span class="brand">{{ 'HEADER.BRAND' | translate }} &copy;</span>
+
         <div class="card flex justify-content-center">
-            <p-dropdown
-                [options]="languages"
-                [(ngModel)]="selectedLanguage"
-                optionLabel="name"
+            <p-dropdown appendTo="body" [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name"
                 (onChange)="changeLanguage($event.value)">
+                <ng-template let-language pTemplate="selectedItem">
+                    <div class="language-item">
+                        {{language.name}}
+                    </div>
+                </ng-template>
+                <ng-template let-language pTemplate="selectedItem">
+                    <div class="language-item">
+                        <img [src]="'assets/flags/' + language.code + '.png'" class="flag-icon" />
+                    </div>
+                </ng-template>
             </p-dropdown>
         </div>
-
     </div>
     <div class="main-bar">
         <div class="logo">
@@ -20,39 +26,127 @@
         <div class="search-inputs">
             <p-iconField iconPosition="left">
                 <p-inputIcon styleClass="pi pi-search" />
-                <input type="text" pInputText placeholder="Search" />
+                <input type="text" pInputText placeholder="{{ 'HEADER.SEARCH_PLACEHOLDER' | translate }}" />
             </p-iconField>
         </div>
         <div class="user-actions">
             <div class="action">
-                <i class="mb-3 pi pi-user text-2xl"></i>
-                <span>Mi cuenta</span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                    aria-label="Toggle navigation">
+                    <i class="pi pi-bars text-2xl"></i>
+                    <span>{{ 'HEADER.MENU' | translate }}</span>
+                </button>
             </div>
             <div class="action">
-                <i class="mb-3 pi pi-question text-2xl"></i>
-                <span>FAQ</span>
+                <i class="pi pi-question text-2xl"></i>
+                <span>{{ 'HEADER.FAQ' | translate }}</span>
             </div>
             <div class="action">
-                <i class="mb-3 pi pi-arrow-circle-right text-2xl"></i>
-                <span>Caja</span>
+                <i class="pi pi-arrow-circle-right text-2xl"></i>
+                <span>{{ 'HEADER.CHECKOUT' | translate }}</span>
+            </div>
+            <div class="action">
+                <i class="pi pi-user text-2xl"></i>
+                <span>{{ 'HEADER.MY_ACCOUNT' | translate }}</span>
             </div>
         </div>
     </div>
-    <nav class="navigation">
+    <!-- <nav class="navigation">
         <div class="nav-links">
-            <a href="#">Catálogo</a>
-            <a href="#">Personalizada</a>
-            <a href="#">Manga</a>
-            <a href="#">Mini</a>
-            <a href="#">Accesorios</a>
-            <a href="#">Blog</a>
-            <a href="#">Contacto</a>
-            <a href="#">Reseñas</a>
-            <a href="#">afiliato</a>
+            <a href="#">{{ 'HEADER.CATALOG' | translate }}</a>
+            <a href="#">{{ 'HEADER.CUSTOM' | translate }}</a>
+            <a href="#">{{ 'HEADER.MANGA' | translate }}</a>
+            <a href="#">{{ 'HEADER.MINI' | translate }}</a>
+            <a href="#">{{ 'HEADER.ACCESSORIES' | translate }}</a>
+            <a href="#">{{ 'HEADER.BLOG' | translate }}</a>
+            <a href="#">{{ 'HEADER.CONTACT' | translate }}</a>
+            <a href="#">{{ 'HEADER.REVIEWS' | translate }}</a>
+            <a href="#">{{ 'HEADER.AFFILIATE' | translate }}</a>
         </div>
         <div class="cart">
-            <span>0.00€</span>
-            <i class="mb-3 pi pi-shopping-cart text-2xl"></i>
+            <span>0.00 €</span>
+            <i class="pi pi-shopping-cart text-2xl"></i>
         </div>
-    </nav>
+    </nav> -->
+    <!-- <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">{{ 'HEADER.CATALOG' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.CUSTOM' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.MANGA' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.MINI' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.ACCESSORIES' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.BLOG' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.CONTACT' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.REVIEWS' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.AFFILIATE' | translate }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
+    <div class="container-fluid">
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+            aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.CATALOG' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.CUSTOM' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.MANGA' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.MINI' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.ACCESSORIES' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.BLOG' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.CONTACT' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.REVIEWS' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'HEADER.AFFILIATE' | translate }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </header>

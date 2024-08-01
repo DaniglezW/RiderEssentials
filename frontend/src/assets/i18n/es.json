@@ -1,4 +1,21 @@
 {
   "language": "Español",
-  "title": "Rider Essentials"
+  "title": "Rider Essentials",
+  "HEADER": {
+      "CONTACT": "Contacto",
+      "BRAND": "Rider Essentials",
+      "SEARCH_PLACEHOLDER": "Buscar",
+      "MY_ACCOUNT": "Mi cuenta",
+      "MENU": "Menú",
+      "FAQ": "FAQ",
+      "CHECKOUT": "Caja",
+      "CATALOG": "Catálogo",
+      "CUSTOM": "Personalizada",
+      "MANGA": "Manga",
+      "MINI": "Mini",
+      "ACCESSORIES": "Accesorios",
+      "BLOG": "Blog",
+      "REVIEWS": "Reseñas",
+      "AFFILIATE": "Afiliato"
+  }
 }

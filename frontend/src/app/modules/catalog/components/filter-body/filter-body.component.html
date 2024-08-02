@@ -1,0 +1,11 @@
+<div class="filter-body">
+  <h3>Filtros</h3>
+  <form>
+    <div class="card flex justify-content-center">
+      <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
+    </div>
+    <span>Precio: {{ rangeValues[0] }} - {{ rangeValues[1] }}</span>
+    <br>
+    <button type="submit">Filtrar</button>
+  </form>
+</div>

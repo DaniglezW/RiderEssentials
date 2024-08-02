@@ -22,25 +22,21 @@
         <span>{{ 'HEADER.CHECKOUT' | translate }}</span>
       </div>
       <div class="action">
-        <a [ngStyle]="{'text-decoration': 'none', 'color': 'white'}" href="/profile">
+        <a [routerLink]="['/profile']" [ngStyle]="{'text-decoration': 'none', 'color': 'white'}">
           <i class="pi pi-user text-2xl"></i>
           <span>{{ 'HEADER.MY_ACCOUNT' | translate }}</span>
         </a>
       </div>
-      <div class="card flex justify-content-center">
-        <p-dropdown appendTo="body" [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name"
-          (onChange)="changeLanguage($event.value)">
-          <ng-template let-language pTemplate="selectedItem">
-            <div class="language-item">
-              {{language.name}}
-            </div>
-          </ng-template>
-          <ng-template let-language pTemplate="selectedItem">
-            <div class="language-item">
-              <img [src]="'assets/flags/' + language.code + '.png'" class="flag-icon" />
-            </div>
-          </ng-template>
-        </p-dropdown>
+      <div class="dropdown" (click)="toggleDropdown()">
+        <button class="dropdown-button">
+          <img [src]="'assets/flags/' + selectedLanguage.code + '.png'" class="flag-icon" id="current-flag" />
+          <span id="current-language">{{ selectedLanguage.name }}</span>
+        </button>
+        <div class="dropdown-content" [ngClass]="{'show': dropdownOpen}">
+          <a href="#" *ngFor="let language of languages" (click)="selectLanguage(language)">
+            <img [src]="'assets/flags/' + language.code + '.png'" class="flag-icon" /> {{ language.name }}
+          </a>
+        </div>
       </div>
     </div>
   </div>

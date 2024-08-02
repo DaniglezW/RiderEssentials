@@ -1,1 +1,4 @@
-<h1>{{ 'language' | translate }}</h1>
+<div class="catalog-container">
+  <app-filter-body class="filter-body" *ngIf="isDesktopView"></app-filter-body>
+  <app-body-list class="body-list" ></app-body-list>
+</div>

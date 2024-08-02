@@ -1,0 +1,35 @@
+/* app.component.css */
+.catalog-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+.filter-body {
+  width: 20%;
+  background-color: #f4f4f4;
+  padding: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.body-list {
+  width: 80%;
+  padding: 15px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .filter-body {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .body-list {
+    width: 100%;
+  }
+}

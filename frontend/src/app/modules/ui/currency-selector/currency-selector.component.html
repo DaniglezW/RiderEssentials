@@ -1,0 +1,17 @@
+<!-- currency-selector.component.html -->
+<div class="currency-selector">
+  <button type="button" class="button" (click)="openModal()">
+    {{ selectedCurrency?.code }}
+  </button>
+
+  <div *ngIf="modalOpen" class="modal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span (click)="closeModal()" class="close">&times;</span>
+      <ul>
+        <li *ngFor="let currency of currencies" [class.selected]="currency.code === selectedCurrency.code" (click)="selectCurrency(currency)">
+          {{ currency.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -24,6 +24,7 @@ import { RatingModule } from 'primeng/rating';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { FormsModule } from '@angular/forms';
+import { SliderModule } from 'primeng/slider';
 
 const MODULES = [
   SidebarModule,
@@ -37,6 +38,7 @@ const MODULES = [
   PanelModule,
   CardModule,
   ToastModule,
+  SliderModule,
   ProgressSpinnerModule,
   ToolbarModule,
   InputNumberModule,

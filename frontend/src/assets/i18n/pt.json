@@ -17,5 +17,24 @@
     "BLOG": "Blog",
     "REVIEWS": "Avaliações",
     "AFFILIATE": "Afiliado"
+  },
+  "footer": {
+    "help": "AJUDA",
+    "helpItems": {
+      "faq": "FAQ",
+      "contact": "Contato",
+      "blog": "Blog"
+    },
+    "importantPages": "PÁGINAS IMPORTANTES",
+    "importantPagesItems": {
+      "termsAndConditions": "1. Condições gerais de venda",
+      "legalInfo": "2. Informação jurídica",
+      "returnPolicy": "5. Políticas de devoluções e reembolsos",
+      "disclaimer": "6. Cláusula de isenção de responsabilidade"
+    },
+    "information": "INFORMAÇÕES",
+    "informationText": "Se você tiver alguma dúvida ou sugestão, entre em contato conosco e responderemos em até 24 horas, de segunda a sexta-feira, entre 9h00 e 17h00.",
+    "contactEmailF": "Contacto: contact",
+    "contactEmailS": "rider-essentials.com"
   }
 }

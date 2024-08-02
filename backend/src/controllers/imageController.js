@@ -1,10 +1,9 @@
-// src/controllers/imageController.js
 const { deleteImage } = require('../services/imageService');
-const pool = require('./config/db');
+const pool = require('../config/db');
 
 const uploadImage = async (req, res) => {
     const { name, description, price, category_id } = req.body;
-    const image_url = `/uploads/${req.file.filename}`;
+    const image_url = req.file.buffer;
 
     try {
         const result = await pool.query(
@@ -24,7 +23,7 @@ const deleteProductAndImage = async (req, res) => {
         const result = await pool.query('SELECT image_url FROM products WHERE product_id = $1', [id]);
         const image_url = result.rows[0].image_url;
 
-        deleteImage(`.${image_url}`);
+        deleteImage(image_url);
 
         await pool.query('DELETE FROM products WHERE product_id = $1', [id]);
 

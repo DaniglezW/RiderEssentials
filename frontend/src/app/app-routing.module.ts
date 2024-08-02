@@ -11,6 +11,14 @@ const routes: Routes = [
       import('./modules/catalog/catalog.module').then(
         (m) => m.CatalogModule
       ),
+  },
+  {
+    path: 'profile',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./modules/profile/profile.module').then(
+        (m) => m.ProfileModule
+      ),
   }
 ];
 

@@ -13,7 +13,7 @@ services:
   
   backend:
     build:
-      context: ./backend
+      context: ../../RiderEssentialsServer
       dockerfile: Dockerfile
     ports:
       - "3000:3000"

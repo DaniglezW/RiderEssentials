@@ -1,7 +1,5 @@
-import { registerLocaleData } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-import es from '@angular/common/locales/es';
-import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
+import { APP_INITIALIZER, DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +20,10 @@ import { ConfigService } from './services/config.service';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+}
+
+export function loadConfig(configService: ConfigService) {
+  return () => configService.loadConfig().toPromise();
 }
 
 @NgModule({
@@ -47,6 +49,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     {
       provide: DEFAULT_CURRENCY_CODE,
       useValue: 'EUR',
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadConfig,
+      deps: [ConfigService],
+      multi: true
     },
     CurrencyService,
     ConfigService

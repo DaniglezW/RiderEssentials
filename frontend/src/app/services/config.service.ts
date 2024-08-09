@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 interface Config {
   sourceSystem: string;
@@ -15,7 +15,9 @@ export class ConfigService {
   constructor(private http: HttpClient) {}
 
   loadConfig(): Observable<Config> {
-    return this.http.get<Config>('assets/config/config.json');
+    return this.http.get<Config>('assets/config/config.json').pipe(
+      tap(config => this.setConfig(config))
+    );
   }
 
   getConfig(): Config | null {

@@ -1,11 +1,39 @@
 <div class="filter-body">
-  <h3>Filtros</h3>
   <form>
     <div class="card flex justify-content-center">
-      <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
+      <div class="card-conteiner">
+        <div class="card-content">
+          <div class="card-title">Price <span>Range</span></div>
+          <div class="values">
+            <div><span>{{ convertPrice(minPrice) }}</span></div> -
+            <div><span>{{ convertPrice(maxPrice) }}</span></div>
+          </div>
+          <div class="slider">
+            <label class="label-min-value">{{ convertPrice(1) }}</label>
+            <label class="label-max-value">{{ convertPrice(5000) }}</label>
+          </div>
+          <div class="rangeslider">
+            <input class="min input-ranges" name="range_1" type="range" min="1" max="5000" [(ngModel)]="minPrice"
+              [value]="minPrice">
+            <input class="max input-ranges" name="range_2" type="range" min="1" max="5000" [(ngModel)]="maxPrice"
+              [value]="maxPrice">
+          </div>
+          <button type="submit">Filtrar</button>
+        </div>
+      </div>
     </div>
-    <span>Precio: {{ rangeValues[0] }} - {{ rangeValues[1] }}</span>
-    <br>
-    <button type="submit">Filtrar</button>
   </form>
+  <br>
+  <div class="card flex justify-content-center">
+    <div class="card-conteiner">
+      <div class="card-content">
+        <div class="card-title">Categories</div>
+
+        <div class="card flex justify-content-center">
+          <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="name" [showClear]="true" placeholder="All categories"></p-dropdown>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>

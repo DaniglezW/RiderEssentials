@@ -10,6 +10,8 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    image BLOB,
+    image_url VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -30,6 +32,7 @@ CREATE TABLE products (
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
     image BLOB,
+    image_url VARCHAR(100) NOT NULL,
     category_id INT REFERENCES categories(category_id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -67,17 +70,17 @@ CREATE TABLE cart_items (
 );
 
 -- Insertar datos en la tabla de usuarios
-INSERT INTO users (name, email, password) VALUES
-('John Doe', 'john@example.com', '123456789'),
-('Jane Smith', 'jane@example.com', '987654321'),
-('Alice Johnson', 'alice@example.com', 'password1'),
-('Bob Brown', 'bob@example.com', 'password2'),
-('Carol White', 'carol@example.com', 'password3'),
-('Dave Black', 'dave@example.com', 'password4'),
-('Eve Green', 'eve@example.com', 'password5'),
-('Frank Harris', 'frank@example.com', 'password6'),
-('Grace Lewis', 'grace@example.com', 'password7'),
-('Hank Walker', 'hank@example.com', 'password8');
+INSERT INTO users (name, email, password, image_url) VALUES
+('John Doe', 'john@example.com', '123456789', 'defaultUser.jpg'),
+('Jane Smith', 'jane@example.com', '987654321', 'defaultUser.jpg'),
+('Alice Johnson', 'alice@example.com', 'password1', 'defaultUser.jpg'),
+('Bob Brown', 'bob@example.com', 'password2', 'defaultUser.jpg'),
+('Carol White', 'carol@example.com', 'password3', 'defaultUser.jpg'),
+('Dave Black', 'dave@example.com', 'password4', 'defaultUser.jpg'),
+('Eve Green', 'eve@example.com', 'password5', 'defaultUser.jpg'),
+('Frank Harris', 'frank@example.com', 'password6', 'defaultUser.jpg'),
+('Grace Lewis', 'grace@example.com', 'password7', 'defaultUser.jpg'),
+('Hank Walker', 'hank@example.com', 'password8', 'defaultUser.jpg');
 
 -- Insertar datos en la tabla de categorías
 INSERT INTO categories (name, description) VALUES
@@ -93,17 +96,17 @@ INSERT INTO categories (name, description) VALUES
 ('Protecciones', 'Protecciones para el motorista y la moto');
 
 -- Insertar datos en la tabla de productos
-INSERT INTO products (name, description, price, image, category_id) VALUES
-('Escape Akrapovic', 'Escape de alto rendimiento en fibra de carbono', 1200.00, UNHEX('89504E470D0A1A0A0000000D4948445200000100000001000802000000FF614E37000000E8494441547801EDC13F688E650000D0AB204441546A42D980020100010000FFFF0000'), 1),
-('Aceite Castrol 4T', 'Aceite sintético para motos de 4 tiempos', 30.00, UNHEX('89504E470D0A1A0A0000000D4948445200000100000001000802000000FF614E37000000E8494441547801EDC13F688E650000D0AB204441546A42D980020100010000FFFF0001'), 2),
-('Filtro de aire K&N', 'Filtro de aire de alto rendimiento', 50.00, UNHEX('89504E470D0A1A0A0000000D4948445200000100000001000802000000FF614E37000000E8494441547801EDC13F688E650000D0AB204441546A42D980020100010000FFFF0002'), 3),
-('Casco Shoei', 'Casco integral de alta seguridad', 400.00, UNHEX('89504E470D0A1A0A0000000D4948445200000100000001000802000000FF614E37000000E8494441547801EDC13F688E650000D0AB204441546A42D980020100010000FFFF0003'), 4),
-('Neumático Michelin', 'Neumático radial para motos deportivas', 150.00, UNHEX('89504E470D0A1A0A0000000D4948445200000100000001000802000000FF614E37000000E8494441547801EDC13F688E650000D0AB204441546A42D980020100010000FFFF0004'), 5),
-('Manillar Rizoma', 'Manillar de aluminio anodizado', 120.00, UNHEX('89504E470D0A1A0A0000000D4948445200000100000001000802000000FF614E37000000E8494441547801EDC13F688E650000D0AB204441546A42D980020100010000FFFF0005'), 6),
-('Llave dinamométrica', 'Llave para apriete controlado', 80.00, UNHEX('89504E470D0A1A0A0000000D4948445200000100000001000802000000FF614E37000000E8494441547801EDC13F688E650000D0AB204441546A42D980020100010000FFFF0006'), 7),
-('Chaqueta Alpinestars', 'Chaqueta con protecciones integradas', 250.00, UNHEX('89504E470D0A1A0A0000000D4948445200000100000001000802000000FF614E37000000E8494441547801EDC13F688E650000D0AB204441546A42D980020100010000FFFF0007'), 8),
-('Intercomunicador Sena', 'Sistema de comunicación para casco', 200.00, UNHEX('89504E470D0A1A0A0000000D4948445200000100000001000802000000FF614E37000000E8494441547801EDC13F688E650000D0AB204441546A42D980020100010000FFFF0008'), 9),
-('Rodilleras Dainese', 'Protección para las rodillas', 90.00, UNHEX('89504E470D0A1A0A0000000D4948445200000100000001000802000000FF614E37000000E8494441547801EDC13F688E650000D0AB204441546A42D980020100010000FFFF0009'), 10);
+INSERT INTO products (name, description, price, image_url, category_id) VALUES
+('Escape Akrapovic', 'Escape de alto rendimiento en fibra de carbono', 1200.00, 'akrapovic.jpg', 1),
+('Aceite Castrol 4T', 'Aceite sintético para motos de 4 tiempos', 30.00, 'default.jpg',2),
+('Filtro de aire K&N', 'Filtro de aire de alto rendimiento', 50.00, 'default.jpg', 3),
+('Casco Shoei', 'Casco integral de alta seguridad', 400.00, 'default.jpg', 4),
+('Neumático Michelin', 'Neumático radial para motos deportivas', 150.00,'default.jpg', 5),
+('Manillar Rizoma', 'Manillar de aluminio anodizado', 120.00,'default.jpg', 6),
+('Llave dinamométrica', 'Llave para apriete controlado', 80.00, 'default.jpg',7),
+('Chaqueta Alpinestars', 'Chaqueta con protecciones integradas', 250.00, 'default.jpg', 8),
+('Intercomunicador Sena', 'Sistema de comunicación para casco', 200.00, 'default.jpg', 9),
+('Rodilleras Dainese', 'Protección para las rodillas', 90.00, 'default.jpg', 10);
 
 -- Insertar datos en la tabla de etiquetas
 INSERT INTO tags (name) VALUES

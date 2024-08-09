@@ -1,12 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const { uploadImage, deleteProductAndImage } = require('../controllers/imageController');
+const { updateImage, updateUserImage, upload } = require('../controllers/imageController');
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-router.post('/products', upload.single('image'), uploadImage);
-router.delete('/products/:id', deleteProductAndImage);
+router.post('/products/:id/image', upload.single('image'), updateImage);
+router.post('/users/:id/image', upload.single('image'), updateUserImage);
 
 module.exports = router;

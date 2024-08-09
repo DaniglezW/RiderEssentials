@@ -1,8 +1,23 @@
 const pool = require('../config/db');
+const path = require('path');
+const fs = require('fs');
 
 const getAllUsers = async () => {
     const [rows] = await pool.query('SELECT * FROM users');
-    return rows;
+
+    const defaultImagePath = path.join(__dirname, '..', '..', 'public', 'images', 'defaultUser.jpg');
+  const defaultImage = fs.readFileSync(defaultImagePath);
+
+  const users = rows.map(user => {
+      if (user.image_url || user.image == null) {
+        user.image = defaultImage;
+      }
+      return {
+        ...user,
+        image: Buffer.from(user.image)
+    };
+  });
+    return users;
 };
 
 const getUserById = async (id) => {

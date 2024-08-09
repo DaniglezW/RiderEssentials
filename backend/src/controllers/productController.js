@@ -9,6 +9,21 @@ const getAllProducts = async (req, res, next) => {
     }
 };
 
+const getProductsByPriceRange = async (req, res, next) => {
+  try {
+      const { minPrice, maxPrice } = req.query;
+
+      if (!minPrice || !maxPrice) {
+          return res.status(400).json({ message: 'minPrice and maxPrice query parameters are required' });
+      }
+
+      const products = await productService.getProductsByPriceRange(parseFloat(minPrice), parseFloat(maxPrice));
+      res.json(products);
+  } catch (error) {
+      next(error);
+  }
+};
+
 const getProductById = async (req, res, next) => {
     try {
         const product = await productService.getProductById(req.params.id);
@@ -51,6 +66,7 @@ const deleteProduct = async (req, res, next) => {
 
 module.exports = {
     getAllProducts,
+    getProductsByPriceRange,
     getProductById,
     createProduct,
     updateProduct,

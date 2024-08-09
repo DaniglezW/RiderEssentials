@@ -1,39 +1,62 @@
-const { deleteImage } = require('../services/imageService');
-const pool = require('../config/db');
+const { updateProductImage, updateUserImageService } = require('../services/imageService');
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-const uploadImage = async (req, res) => {
-    const { name, description, price, category_id } = req.body;
-    const image_url = req.file.buffer;
+const updateImage = async (req, res) => {
+  const productId = parseInt(req.params.id, 10);
 
-    try {
-        const result = await pool.query(
-            'INSERT INTO products (name, description, price, image_url, category_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [name, description, price, image_url, category_id]
-        );
-        res.json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded' });
+  }
+
+  const imageBuffer = req.file.buffer;
+
+  if (isNaN(productId)) {
+    return res.status(400).json({ message: 'Invalid product ID' });
+  }
+
+  try {
+    const success = await updateProductImage(productId, imageBuffer);
+    if (success) {
+      res.status(200).json({ message: 'Product image updated successfully' });
+    } else {
+      res.status(404).json({ message: 'Product not found' });
     }
+  } catch (error) {
+    console.error('Error updating product image:', error);
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
+  }
 };
 
-const deleteProductAndImage = async (req, res) => {
-    const { id } = req.params;
+const updateUserImage = async (req, res) => {
+  const userId = parseInt(req.params.id, 10);
 
-    try {
-        const result = await pool.query('SELECT image_url FROM products WHERE product_id = $1', [id]);
-        const image_url = result.rows[0].image_url;
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded' });
+  }
 
-        deleteImage(image_url);
+  const imageBuffer = req.file.buffer;
 
-        await pool.query('DELETE FROM products WHERE product_id = $1', [id]);
+  if (isNaN(userId)) {
+    return res.status(400).json({ message: 'Invalid product ID' });
+  }
 
-        res.json({ message: 'Producto eliminado' });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+  try {
+    const success = await updateUserImageService(userId, imageBuffer);
+    if (success) {
+      res.status(200).json({ message: 'User image updated successfully' });
+    } else {
+      res.status(404).json({ message: 'User not found' });
     }
+  } catch (error) {
+    console.error('Error updating user image:', error);
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
+  }
 };
 
 module.exports = {
-    uploadImage,
-    deleteProductAndImage
+    updateImage,
+    updateUserImage,
+    upload,
 };

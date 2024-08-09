@@ -1,4 +1,4 @@
 <div class="catalog-container">
-  <app-filter-body class="filter-body" *ngIf="isDesktopView"></app-filter-body>
-  <app-body-list class="body-list" ></app-body-list>
+  <app-filter-body [categories]="categories" class="filter-body" *ngIf="isDesktopView"></app-filter-body>
+  <app-body-list [products]="products" class="body-list" ></app-body-list>
 </div>

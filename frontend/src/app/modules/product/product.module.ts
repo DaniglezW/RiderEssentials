@@ -7,34 +7,33 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { CatalogRouterModule } from './catalog-routing.module';
-import { CatalogService } from './services/catalog.service';
-import { CatalogComponent } from './view/catalog.component';
+import { ProductRouterModule } from './product-routing.module';
 import { PaginatorModule } from 'primeng/paginator';
-import { FilterBodyComponent } from './components/filter-body/filter-body.component';
-import { BodyListComponent } from './components/body-list/body-list.component';
 import { PrimeNgModule } from '../../prime-ng.module';
-import { BodyListComponentCategory } from './components/body-list-category/body-list-category.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductContainerComponent } from './components/product-component/product-container.component';
+import { ProductComponent } from './view/product.component';
+import { ProductService } from './services/productService.service';
 import { TruncatePipe } from '../../core/pipes/truncate.pipe';
+import { CatalogService } from '../catalog/services/catalog.service';
 
 @NgModule({
     declarations: [
-        CatalogComponent,
-        FilterBodyComponent,
-        BodyListComponent,
-        BodyListComponentCategory,
-        TruncatePipe
+      ProductContainerComponent,
+      ProductListComponent,
+      ProductComponent,
+      TruncatePipe
     ],
     imports: [
         CommonModule,
         FormsModule,
         PaginatorModule,
-        CatalogRouterModule,
+        ProductRouterModule,
         NgbCollapseModule,
         NgbDatepickerModule,
         PrimeNgModule,
         TranslateModule.forChild(),
     ],
-    providers: [CatalogService],
+    providers: [ProductService, CatalogService],
 })
-export class CatalogModule { }
+export class ProductModule { }

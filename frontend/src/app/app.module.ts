@@ -16,7 +16,12 @@ import { ScrollToTopComponent } from './modules/ui/scroll-to-top/scroll-to-top.c
 import { CurrencyService } from './services/currency.service';
 import { CurrencySelectorComponent } from './modules/ui/currency-selector/currency-selector.component';
 import { ConfigService } from './services/config.service';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { ProductService } from './modules/product/services/productService.service';
+import { CatalogService } from './modules/catalog/services/catalog.service';
 
+registerLocaleData(localeEs, 'es');
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
@@ -27,7 +32,14 @@ export function loadConfig(configService: ConfigService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, LayoutComponent, HeaderComponent, FooterComponent, ScrollToTopComponent, CurrencySelectorComponent],
+  declarations: [
+    AppComponent, 
+    LayoutComponent, 
+    HeaderComponent, 
+    FooterComponent, 
+    ScrollToTopComponent, 
+    CurrencySelectorComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -57,7 +69,9 @@ export function loadConfig(configService: ConfigService) {
       multi: true
     },
     CurrencyService,
-    ConfigService
+    ConfigService,
+    ProductService,
+    CatalogService
   ],
   bootstrap: [AppComponent],
 })

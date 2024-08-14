@@ -29,10 +29,16 @@
       <div class="card-content">
         <div class="card-title">Categories</div>
 
-        <div class="card flex justify-content-center">
-          <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="name" [showClear]="true" placeholder="All categories"></p-dropdown>
+        <div class="dropdown" (click)="toggleDropdown()">
+          <button class="dropdown-button">
+            <span id="current-category">{{ selectedCategory?.name || 'All Categories' }}</span>
+          </button>
+          <div class="dropdown-content" [ngClass]="{'show': dropdownOpen}">
+            <a href="#" *ngFor="let category of allCategories" (click)="selectCategory(category)">
+              {{ category.name }}
+            </a>
+          </div>
         </div>
-
       </div>
     </div>
   </div>

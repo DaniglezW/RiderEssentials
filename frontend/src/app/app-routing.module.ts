@@ -19,6 +19,14 @@ const routes: Routes = [
       import('./modules/profile/profile.module').then(
         (m) => m.ProfileModule
       ),
+  },
+  {
+    path: 'product/:productId',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./modules/product/product.module').then(
+        (m) => m.ProductModule
+      ),
   }
 ];
 

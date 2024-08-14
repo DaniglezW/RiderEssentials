@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ProductService } from '../product/services/productService.service';
+import { ProductSearchService } from '../../services/productSearchService.service';
+import { PageProductResponse } from '../catalog/model/PageProductResponse';
+import { CatalogService } from '../catalog/services/catalog.service';
+
+export class PageStateService {
+  page: number = 0;
+  rows: number = 12;
+}
 
 @Component({
   selector: 'app-header',
@@ -14,16 +23,35 @@ export class HeaderComponent implements OnInit {
     { code: 'pt', name: 'Português' }
   ];
 
+  searchTerm: string = '';
   selectedLanguage: any;
   dropdownOpen = false;
 
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService, 
+    private productService: ProductService, 
+    private productSearchService: ProductSearchService,
+    private catalogService: CatalogService
+  ) { }
 
   ngOnInit() {
     const defaultLang = localStorage.getItem('selectedLanguage') || 'es';
     this.translate.setDefaultLang(defaultLang);
     this.translate.use(defaultLang);
     this.selectedLanguage = this.languages.find(lang => lang.code === defaultLang) || this.languages[0];
+  }
+
+  onSearch(term: string) {
+    this.searchTerm = term;
+
+    if (term.trim().length === 0) {
+      this.catalogService.getProducts(new PageStateService).subscribe((response: PageProductResponse) => {
+        this.productSearchService.changeProducts(response);
+      });
+    } else {
+      this.productService.searchProducts(term).subscribe((response: PageProductResponse) => {
+        this.productSearchService.changeProducts(response);
+      });
+    }
   }
 
   changeLanguage(language: any) {

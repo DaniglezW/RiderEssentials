@@ -1,3 +1,7 @@
+<div class="header-container">
+  <h2 class="category-title">{{ "body.category.category" | translate }}{{ "body.category." + products[0].category.name.trim() | translate }}</h2>
+</div>
+
 <div class="cards-container">
   <div 
     class="card" 
@@ -14,20 +18,4 @@
       <p class="card__price">{{ convertPrice(product.price) }}</p>
     </div>
   </div>
-</div>
-<div class="d-flex align-items-center mb-3">
-  <h5 style="font-size: 18px; margin-right: 15px">
-      {{ "body.page" | translate
-      }}{{ page + 1 + "/" + pageProducts.totalPages }}
-  </h5>
-  <p-paginator
-      (onPageChange)="onPageChange($any($event))"
-      [first]="first"
-      [rows]="rows"
-      [pageLinkSize]="5"
-      [totalRecords]="pageProducts.totalElements"
-      [rowsPerPageOptions]="[12, 24, 30]"
-      [showFirstLastIcon]="true"
-      [dropdownAppendTo]="'body'"
-  ></p-paginator>
 </div>

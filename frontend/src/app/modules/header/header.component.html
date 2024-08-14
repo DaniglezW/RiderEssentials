@@ -1,12 +1,15 @@
 <header>
   <div class="main-bar">
     <div class="logo">
-      <img src="../../../assets/img/logo3.jpg" alt="payment-methods">
+      <a href="/catalog">
+        <img src="../../../assets/img/logo3.jpg" alt="payment-methods">
+      </a>
     </div>
+
     <div class="search-inputs">
       <p-iconField iconPosition="left">
         <p-inputIcon styleClass="pi pi-search" />
-        <input type="text" pInputText placeholder="{{ 'HEADER.SEARCH_PLACEHOLDER' | translate }}" />
+        <input type="text" pInputText placeholder="{{ 'HEADER.SEARCH_PLACEHOLDER' | translate }}" [(ngModel)]="searchTerm" (ngModelChange)="onSearch(searchTerm)" />
       </p-iconField>
     </div>
     <div class="user-actions">
@@ -50,31 +53,13 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link" href="#">{{ 'HEADER.CATALOG' | translate }}</a>
+            <a class="nav-link" [routerLink]="'/catalog'" href="catalog">{{ 'HEADER.CATALOG' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">{{ 'HEADER.CUSTOM' | translate }}</a>
+            <a class="nav-link" [routerLink]="'/profile'" href="profile">{{ 'HEADER.PROFILE' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">{{ 'HEADER.MANGA' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">{{ 'HEADER.MINI' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">{{ 'HEADER.ACCESSORIES' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">{{ 'HEADER.BLOG' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">{{ 'HEADER.CONTACT' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">{{ 'HEADER.REVIEWS' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">{{ 'HEADER.AFFILIATE' | translate }}</a>
+            <a class="nav-link"  [routerLink]="'/cart'" href="cart">{{ 'HEADER.CART' | translate }}</a>
           </li>
         </ul>
       </div>

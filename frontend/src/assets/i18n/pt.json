@@ -1,6 +1,22 @@
 {
   "language": "Português",
   "title": "Rider Essentials",
+  "body": {
+    "page": "Página ",
+    "category": {
+      "category": "Categoria: ",
+      "Accesorios de Rendimiento": "Acessórios de Desempenho",
+      "Lubricantes": "Lubrificantes",
+      "Repuestos": "Peças de Reposição",
+      "Equipamiento": "Equipamento",
+      "Neumáticos": "Pneus",
+      "Accesorios Estéticos": "Acessórios Estéticos",
+      "Herramientas": "Ferramentas",
+      "Ropa": "Roupa",
+      "Electrónica": "Eletrônica",
+      "Protecciones": "Proteções"
+    }
+  },
   "HEADER": {
     "CONTACT": "Contato",
     "BRAND": "Rider Essentials",

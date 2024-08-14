@@ -1,22 +1,38 @@
 {
   "language": "English",
   "title": "Rider Essentials",
+  "body": {
+    "page": "Page ",
+    "category": {
+      "category": "Category: ",
+      "Accesorios de Rendimiento": "Performance Accessories",
+      "Lubricantes": "Lubricants",
+      "Repuestos": "Spare Parts",
+      "Equipamiento": "Equipment",
+      "Neumáticos": "Tires",
+      "Accesorios Estéticos": "Aesthetic Accessories",
+      "Herramientas": "Tools",
+      "Ropa": "Clothing",
+      "Electrónica": "Electronics",
+      "Protecciones": "Protections"
+    }
+  },
   "HEADER": {
-        "CONTACT": "Contact",
-        "BRAND": "Rider Essentials",
-        "SEARCH_PLACEHOLDER": "Search",
-        "MY_ACCOUNT": "My Account",
-        "MENU": "Menu",
-        "FAQ": "FAQ",
-        "CHECKOUT": "Checkout",
-        "CATALOG": "Catalog",
-        "CUSTOM": "Custom",
-        "MANGA": "Manga",
-        "MINI": "Mini",
-        "ACCESSORIES": "Accessories",
-        "BLOG": "Blog",
-        "REVIEWS": "Reviews",
-        "AFFILIATE": "Affiliate"
+    "CONTACT": "Contact",
+    "BRAND": "Rider Essentials",
+    "SEARCH_PLACEHOLDER": "Search",
+    "MY_ACCOUNT": "My Account",
+    "MENU": "Menu",
+    "FAQ": "FAQ",
+    "CHECKOUT": "Checkout",
+    "CATALOG": "Catalog",
+    "CUSTOM": "Custom",
+    "MANGA": "Manga",
+    "MINI": "Mini",
+    "ACCESSORIES": "Accessories",
+    "BLOG": "Blog",
+    "REVIEWS": "Reviews",
+    "AFFILIATE": "Affiliate"
   },
   "footer": {
     "help": "HELP",

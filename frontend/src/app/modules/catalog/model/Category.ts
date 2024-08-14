@@ -1,7 +1,7 @@
 export interface Category {
-  category_id: number;
+  categoryId: number;
   name: string;
-  description: string;
-  created_at: Date;
-  updated_at: Date;
+  description?: string;
+  created_at?: Date;
+  updated_at?: Date;
 }

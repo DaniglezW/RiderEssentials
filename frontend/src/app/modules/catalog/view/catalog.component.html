@@ -1,4 +1,9 @@
 <div class="catalog-container">
-  <app-filter-body [categories]="categories" class="filter-body" *ngIf="isDesktopView"></app-filter-body>
-  <app-body-list [products]="products" class="body-list" ></app-body-list>
+  <app-filter-body [categories]="categories" (getNextPage)="getProductsByCategory($event)" class="filter-body" *ngIf="isDesktopView"></app-filter-body>
+  <app-body-list-category *ngIf="categoryCatalog  && !loading" [products]="productsByCategory" ></app-body-list-category>
+  <app-body-list *ngIf="!categoryCatalog && !loading" [pageProducts]="products" (getNextPage)="getNextPage($event)" class="body-list" ></app-body-list>
+
+  <div *ngIf="loading" class="d-flex justify-content-center spinner-container">
+    <span class="spinner-border spinner-border-sm size-spinner"></span>
+  </div>
 </div>

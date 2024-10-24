@@ -26,8 +26,12 @@ interface PageEvent {
 export class BodyListComponent implements OnChanges, OnInit {
 
   @Output() getNextPage = new EventEmitter<PageStateService>();
+  @Input() searchWithFilter = new EventEmitter<{min: number, max: number}>();
   @Input() pageProducts!: PageProductResponse;
+  @Input() noPageable: boolean = false;
   products!: Product[];
+  @Input() max: number = 5000;
+  @Input() min: number = 0;
   rows!: number;
   first!: number;
   page!: number;

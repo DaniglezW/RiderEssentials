@@ -18,7 +18,7 @@
             <input class="max input-ranges" name="range_2" type="range" min="1" max="5000" [(ngModel)]="maxPrice"
               [value]="maxPrice">
           </div>
-          <button type="submit">Filtrar</button>
+          <button type="submit" (click)="searchWithPrice()" >Filtrar</button>
         </div>
       </div>
     </div>

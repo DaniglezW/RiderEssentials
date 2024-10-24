@@ -15,7 +15,7 @@ import { FilterBodyComponent } from './components/filter-body/filter-body.compon
 import { BodyListComponent } from './components/body-list/body-list.component';
 import { PrimeNgModule } from '../../prime-ng.module';
 import { BodyListComponentCategory } from './components/body-list-category/body-list-category.component';
-import { TruncatePipe } from '../../core/pipes/truncate.pipe';
+import { TruncatePipe } from '@/app/core/pipes/truncate.pipe';
 
 @NgModule({
     declarations: [

@@ -18,6 +18,11 @@ export class ProductService {
     return this.http.get<Product>(`${this.apiProductsUrl}/${productId}`);
   }
 
+  getProductsByFilter(minPrice: number, maxPrice: number): Observable<Product[]> {
+    const url = `${this.apiProductsUrl}/price?minPrice=${minPrice}&maxPrice=${maxPrice}`;
+    return this.http.get<Product[]>(url);
+  }
+
   searchProducts(term: string): Observable<PageProductResponse> {
     return this.http.get<PageProductResponse>(`${this.apiProductsUrl}/search?query=${term}`);
   }

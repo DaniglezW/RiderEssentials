@@ -1,4 +1,8 @@
-<div class="cards-container">
+<div class="header-container" *ngIf="noPageable">
+  <h2 class="category-title">{{ "body.priceTitle.product" | translate }}{{ convertPrice(min) }}{{ "body.priceTitle.and" | translate }}{{ convertPrice(max) }}</h2>
+</div>
+
+<div class="cards-container" *ngIf="products.length > 0 else elseBlock">
   <div 
     class="card" 
     *ngFor="let product of products" 
@@ -15,7 +19,11 @@
     </div>
   </div>
 </div>
-<div class="d-flex align-items-center mb-3">
+<ng-template #elseBlock>
+  <h1 class="no-products-title">{{ "body.noProducts" | translate }}</h1>
+</ng-template>
+
+<div class="d-flex align-items-center mb-3" *ngIf="!noPageable && products.length > 0">
   <h5 style="font-size: 18px; margin-right: 15px">
       {{ "body.page" | translate
       }}{{ page + 1 + "/" + pageProducts.totalPages }}

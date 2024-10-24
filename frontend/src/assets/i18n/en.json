@@ -3,6 +3,11 @@
   "title": "Rider Essentials",
   "body": {
     "page": "Page ",
+    "noProducts": "No products available for this search.",
+    "priceTitle": {
+      "product": "Products between ",
+      "and": " and "
+    },
     "category": {
       "category": "Category: ",
       "Accesorios de Rendimiento": "Performance Accessories",

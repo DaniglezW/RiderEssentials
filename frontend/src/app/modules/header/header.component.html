@@ -16,19 +16,9 @@
       <div class="action">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
           aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-          <i class="pi pi-bars text-2xl"></i>
-          <span>{{ 'HEADER.MENU' | translate }}</span>
+          <i class="pi pi-shopping-cart text-2xl"></i>
+          <span>{{ 'HEADER.CHECKOUT' | translate }}</span>
         </button>
-      </div>
-      <div class="action">
-        <i class="pi pi-shopping-cart text-2xl"></i>
-        <span>{{ 'HEADER.CHECKOUT' | translate }}</span>
-      </div>
-      <div class="action">
-        <a [routerLink]="['/profile']" [ngStyle]="{'text-decoration': 'none', 'color': 'white'}">
-          <i class="pi pi-user text-2xl"></i>
-          <span>{{ 'HEADER.MY_ACCOUNT' | translate }}</span>
-        </a>
       </div>
       <div class="dropdown" (click)="toggleDropdown()">
         <button class="dropdown-button">
@@ -44,25 +34,41 @@
     </div>
   </div>
   <div class="container-fluid">
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
-      aria-labelledby="offcanvasDarkNavbarLabel">
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Rider Essentials</h5>
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Carrito de Compras</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
+  
       <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/catalog'" href="catalog">{{ 'HEADER.CATALOG' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/profile'" href="profile">{{ 'HEADER.PROFILE' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  [routerLink]="'/cart'" href="cart">{{ 'HEADER.CART' | translate }}</a>
-          </li>
-        </ul>
+        <div *ngIf="cartItems.length > 0" class="displey-containers">
+          <ul class="cart-items">
+            <li *ngFor="let item of cartItems" class="cart-item">
+              <img [src]="item.image" alt="{{ item.name }}" class="cart-item-image" />
+              <div class="cart-item-details">
+                <h5 title="{{ item.name }}">{{ item.name.substring(0, 20) }}...</h5> <!-- Tooltip con el nombre completo -->
+                <p *ngIf="item.size !== 'X'">Talla: {{ item.size }}</p>
+                <p>x {{ item.quantity }}</p>
+              </div>
+            </li>
+          </ul>
+
+          <div>
+            <hr>
+            <div class="cart-total">
+              <button class="btn btn-danger w-20" (click)="cleanShoppingCart()">
+                <i class="pi pi-eraser text-2xl"></i>
+              </button>
+              <h4>Total: {{ convertPrice(totalPrice) }}</h4>
+            </div>
+            <button type="button" class="btn btn-primary total-price w-100" (click)="proceedToCheckout()">Pagar ahora</button>
+          </div>
+        </div>
+  
+        <div *ngIf="cartItems.length === 0">
+          <p>Tu carrito está vacío</p>
+        </div>
       </div>
     </div>
-  </div>
+  </div>  
 </header>

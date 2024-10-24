@@ -14,15 +14,13 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductContainerComponent } from './components/product-component/product-container.component';
 import { ProductComponent } from './view/product.component';
 import { ProductService } from './services/productService.service';
-import { TruncatePipe } from '../../core/pipes/truncate.pipe';
 import { CatalogService } from '../catalog/services/catalog.service';
 
 @NgModule({
     declarations: [
       ProductContainerComponent,
       ProductListComponent,
-      ProductComponent,
-      TruncatePipe
+      ProductComponent
     ],
     imports: [
         CommonModule,

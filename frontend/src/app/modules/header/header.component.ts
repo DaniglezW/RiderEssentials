@@ -4,6 +4,8 @@ import { ProductService } from '../product/services/productService.service';
 import { ProductSearchService } from '../../services/productSearchService.service';
 import { PageProductResponse } from '../catalog/model/PageProductResponse';
 import { CatalogService } from '../catalog/services/catalog.service';
+import { CurrencyService } from '@/app/services/currency.service';
+import { CartService } from '@/app/services/CartService.service';
 
 export class PageStateService {
   page: number = 0;
@@ -26,14 +28,23 @@ export class HeaderComponent implements OnInit {
   searchTerm: string = '';
   selectedLanguage: any;
   dropdownOpen = false;
+  cartItems: any[] = [];
+  totalPrice: number = 0;
 
   constructor(private translate: TranslateService, 
     private productService: ProductService, 
     private productSearchService: ProductSearchService,
-    private catalogService: CatalogService
+    private catalogService: CatalogService,
+    private currencyService: CurrencyService,
+    private cartService: CartService
   ) { }
 
   ngOnInit() {
+    this.cartService.loadCart();
+    this.cartService.getCartItems().subscribe((items) => {
+      this.cartItems = items;
+      this.calculateTotalPrice();
+    });
     const defaultLang = localStorage.getItem('selectedLanguage') || 'es';
     this.translate.setDefaultLang(defaultLang);
     this.translate.use(defaultLang);
@@ -68,5 +79,31 @@ export class HeaderComponent implements OnInit {
     this.translate.use(language.code);
     localStorage.setItem('selectedLanguage', language.code);
     this.dropdownOpen = false;
+  }
+
+  loadCart() {
+    const cart = localStorage.getItem('cart');
+    if (cart) {
+      this.cartItems = JSON.parse(cart);
+      this.calculateTotalPrice();
+    }
+  }
+
+  calculateTotalPrice() {
+    this.totalPrice = this.cartItems.reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0);
+  }
+
+  proceedToCheckout() {
+    console.log('Pagando...');
+  }
+
+  cleanShoppingCart() {
+    this.cartService.clearCart();
+  }
+
+  convertPrice(priceInEuros: number): string {
+    return this.currencyService.formatPriceInSelectedCurrency(priceInEuros);
   }
 }

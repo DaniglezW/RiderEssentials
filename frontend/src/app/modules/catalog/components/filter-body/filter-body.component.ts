@@ -10,6 +10,7 @@ import { Category } from '../../model/Category';
 export class FilterBodyComponent implements OnChanges, OnInit {
 
   @Output() getNextPage = new EventEmitter<number>();
+  @Output() searchWithFilter = new EventEmitter<{min: number, max: number}>();
   selectedCategory: Category | undefined;
   @Input() categories!: Category[];
   allCategories: Category[] = [];
@@ -45,6 +46,10 @@ export class FilterBodyComponent implements OnChanges, OnInit {
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  searchWithPrice() {
+    this.searchWithFilter.emit({ min: this.minPrice, max: this.maxPrice })
   }
 
   selectCategory(category: Category) {

@@ -22,8 +22,8 @@ Rider Essentials es una aplicación web de compras dedicada a los productos de m
 
 ## Requisitos
 
-- Node.js (versión 14 o superior)
-- npm (gestor de paquetes de Node)
+- Node.js (versión 14 o superior).
+- npm (gestor de paquetes de Node).
 
 ## Instalación
 

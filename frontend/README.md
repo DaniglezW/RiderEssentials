@@ -1,2 +1,0 @@
-# RIDER ESSENTIALS
-

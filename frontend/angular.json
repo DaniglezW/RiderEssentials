@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sicab-lectura-facturacion-front": {
+    "rider-essentials": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/sicab-lectura-facturacion-front",
+            "outputPath": "dist/rider-essentials",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "preserveSymlinks": true,
@@ -91,10 +91,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "sicab-lectura-facturacion-front:build:production"
+              "buildTarget": "rider-essentials:build:production"
             },
             "development": {
-              "buildTarget": "sicab-lectura-facturacion-front:build:development"
+              "buildTarget": "rider-essentials:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -102,7 +102,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "sicab-lectura-facturacion-front:build"
+            "buildTarget": "rider-essentials:build"
           }
         },
         "test": {

@@ -15,10 +15,10 @@ export class BodyListComponentCategory implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['products'] && this.products) {
+      this.products = this.products.filter(product => product.productId !== 9999);
       this.products.forEach(product => {
         if (product.image) {
           console.log(product);
-          
           product.image = `data:image/jpeg;base64,${product.image}`;
         }
       });

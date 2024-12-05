@@ -46,7 +46,7 @@ export class BodyListComponent implements OnChanges, OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['pageProducts'] && this.pageProducts) {
-      this.products = this.pageProducts.content;
+      this.products = this.pageProducts.content.filter(product => product.productId !== 9999);
       this.products.forEach(product => {
         if (product.image) {
           product.image = `data:image/jpeg;base64,${product.image}`;

@@ -21,13 +21,17 @@
 }
 
 .spinner-container {
-  width: 80%;
-  margin-top: -40px;
-  margin-bottom: 60px;
-  position: relative;
+  position: absolute; /* Cambiado a absolute */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra el contenedor en ambas direcciones */
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  height: 100%; /* Asegura que ocupe todo el alto */
+  z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+  background: rgba(255, 255, 255, 0.8); /* Opción: fondo semitransparente */
 }
 
 .size-spinner {
@@ -158,6 +162,7 @@
   background-position: center;
   background-attachment: fixed;
   animation: square-animation 10s ease-in-out infinite both;
+  z-index: 1000;
 }
 
 .loader-square:nth-of-type(0) {
@@ -190,4 +195,29 @@
 
 .loader-square:nth-of-type(7) {
   animation-delay: -10s;
+}
+
+@media screen and (max-width: 768px) {
+  .filter-body {
+    display: block !important;
+    position: sticky !important;
+    z-index: 10;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ddd;
+  }
+
+  .filter-body > * {
+    margin-bottom: 10px;
+  }
+
+  .catalog-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-content {
+    max-width: 2000px;
+  }
 }

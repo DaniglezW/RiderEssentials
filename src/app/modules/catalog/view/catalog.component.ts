@@ -5,6 +5,7 @@ import { Category } from '../model/Category';
 import { Product } from '../../../model/product';
 import { ProductSearchService } from '../../../services/productSearchService.service';
 import { ProductService } from '../../product/services/productService.service';
+import { Subscription, timer } from 'rxjs';
 
 export class PageStateService {
   page: number = 0;
@@ -18,8 +19,10 @@ export class PageStateService {
 })
 export class CatalogComponent implements OnInit {
 
+  private timerSubscription?: Subscription;
   @Output() products!: PageProductResponse;
   @Output() productsByCategory!: Product[];
+  showExtendedMessage: boolean = false;
   @Output() categories!: Category[];
   categoryCatalog: boolean = false;
   isDesktopView: boolean = false;
@@ -59,16 +62,34 @@ export class CatalogComponent implements OnInit {
   getNextPage(page: PageStateService) {
     this.noPageable = false;
     this.loading = true;
-    this.catalogService.getProducts(page)
-      .subscribe({
-        next: (response) => {
-          const res: PageProductResponse = response;
-          if (res.content && res.content.length > 0) {
-            this.products = res
-          }
-          this.loading = false;
+    this.showExtendedMessage = false;
+
+    this.timerSubscription = timer(10000).subscribe(() => {
+      this.showExtendedMessage = true;
+    });
+
+    this.catalogService.getProducts(page).subscribe({
+      next: (response) => {
+        const res: PageProductResponse = response;
+        if (res.content && res.content.length > 0) {
+          this.products = res;
         }
-      });
+        this.loading = false;
+        this.clearTimer();
+      },
+      error: (err) => {
+        this.loading = false;
+        this.clearTimer();
+        console.error('Error al obtener productos:', err);
+      }
+    });
+  }
+
+  private clearTimer() {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+      this.timerSubscription = undefined;
+    }
   }
 
   getProductsByCategory(categoryId: number) {

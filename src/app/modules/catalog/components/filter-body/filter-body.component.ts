@@ -52,7 +52,8 @@ export class FilterBodyComponent implements OnChanges, OnInit {
     this.searchWithFilter.emit({ min: this.minPrice, max: this.maxPrice })
   }
 
-  selectCategory(category: Category) {
+  selectCategory(event: Event, category: Category) {
+    event.preventDefault();
     this.selectedCategory = category;
     this.dropdownOpen = false;
     this.getNextPage.emit(category.categoryId);

@@ -34,7 +34,7 @@
             <span id="current-category">{{ selectedCategory?.name || 'All Categories' }}</span>
           </button>
           <div class="dropdown-content" [ngClass]="{'show': dropdownOpen}">
-            <a href="#" *ngFor="let category of allCategories" (click)="selectCategory(category)">
+            <a *ngFor="let category of allCategories" (click)="selectCategory($event, category)">
               {{ category.name }}
             </a>
           </div>

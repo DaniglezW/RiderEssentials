@@ -18,7 +18,6 @@ export class BodyListComponentCategory implements OnChanges {
       this.products = this.products.filter(product => product.productId !== 9999);
       this.products.forEach(product => {
         if (product.image) {
-          console.log(product);
           product.image = `data:image/jpeg;base64,${product.image}`;
         }
       });

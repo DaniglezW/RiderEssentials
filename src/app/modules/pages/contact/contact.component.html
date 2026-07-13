@@ -1,0 +1,63 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ 'CONTACT.TITLE' | translate }}</h1>
+    <p>{{ 'CONTACT.SUBTITLE' | translate }}</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="info-card">
+        <i class="pi pi-envelope"></i>
+        <h3>{{ 'CONTACT.EMAIL' | translate }}</h3>
+        <p>contact&#64;rider-essentials.com</p>
+      </div>
+      <div class="info-card">
+        <i class="pi pi-clock"></i>
+        <h3>{{ 'CONTACT.HOURS' | translate }}</h3>
+        <p>{{ 'CONTACT.HOURS_DETAIL' | translate }}</p>
+      </div>
+      <div class="info-card">
+        <i class="pi pi-phone"></i>
+        <h3>{{ 'CONTACT.PHONE' | translate }}</h3>
+        <p>+34 900 123 456</p>
+      </div>
+      <div class="info-card">
+        <i class="pi pi-map-marker"></i>
+        <h3>{{ 'CONTACT.ADDRESS' | translate }}</h3>
+        <p>{{ 'CONTACT.ADDRESS_DETAIL' | translate }}</p>
+      </div>
+    </div>
+
+    <form class="contact-form" (ngSubmit)="submit()" *ngIf="!submitted">
+      <div class="form-field">
+        <label>{{ 'CONTACT.NAME' | translate }}</label>
+        <input type="text" [(ngModel)]="form.name" name="name" required />
+      </div>
+      <div class="form-field">
+        <label>{{ 'CONTACT.EMAIL_LABEL' | translate }}</label>
+        <input type="email" [(ngModel)]="form.email" name="email" required />
+      </div>
+      <div class="form-field">
+        <label>{{ 'CONTACT.SUBJECT' | translate }}</label>
+        <select [(ngModel)]="form.subject" name="subject">
+          <option *ngFor="let s of subjects" [value]="s.value">{{ s.labelKey | translate }}</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>{{ 'CONTACT.MESSAGE' | translate }}</label>
+        <textarea [(ngModel)]="form.message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="btn-primary" [disabled]="!form.name || !form.email || !form.message">
+        {{ 'CONTACT.SEND' | translate }}
+      </button>
+    </form>
+
+    <div class="success-msg" *ngIf="submitted">
+      <i class="pi pi-check-circle"></i>
+      <h2>{{ 'CONTACT.SUCCESS' | translate }}</h2>
+      <p>{{ 'CONTACT.SUCCESS_MSG' | translate }}</p>
+      <button class="btn-secondary" (click)="submitted = false">{{ 'CONTACT.SEND_ANOTHER' | translate }}</button>
+    </div>
+  </div>
+</div>
+<p-toast />

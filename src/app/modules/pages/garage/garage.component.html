@@ -1,0 +1,76 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1><i class="pi pi-flag"></i> {{ 'GARAGE.TITLE' | translate }}</h1>
+    <p>{{ 'GARAGE.SUBTITLE' | translate }}</p>
+  </div>
+
+  <div class="garage-actions">
+    <button class="btn-primary" (click)="showForm = !showForm">
+      <i class="pi pi-plus"></i> {{ 'GARAGE.ADD_BIKE' | translate }}
+    </button>
+  </div>
+
+  <div class="add-form" *ngIf="showForm">
+    <h3>{{ 'GARAGE.NEW_BIKE' | translate }}</h3>
+    <div class="form-grid">
+      <div class="form-field">
+        <label>{{ 'GARAGE.MAKE' | translate }}</label>
+        <select [(ngModel)]="newBike.make" (change)="onMakeChange()">
+          <option value="">{{ 'GARAGE.SELECT_MAKE' | translate }}</option>
+          <option *ngFor="let make of makes" [value]="make">{{ make }}</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>{{ 'GARAGE.MODEL' | translate }}</label>
+        <select [(ngModel)]="newBike.model" [disabled]="!newBike.make">
+          <option value="">{{ 'GARAGE.SELECT_MODEL' | translate }}</option>
+          <option *ngFor="let model of models" [value]="model">{{ model }}</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>{{ 'GARAGE.YEAR' | translate }}</label>
+        <select [(ngModel)]="newBike.year">
+          <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>{{ 'GARAGE.NICKNAME' | translate }}</label>
+        <input type="text" [(ngModel)]="newBike.nickname" [placeholder]="'GARAGE.NICKNAME_PLACEHOLDER' | translate" />
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-secondary" (click)="showForm = false">{{ 'CHECKOUT.BACK' | translate }}</button>
+      <button class="btn-primary" (click)="addBike()" [disabled]="!newBike.make || !newBike.model">
+        {{ 'GARAGE.SAVE' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="bikes.length === 0 && !showForm">
+    <i class="pi pi-flag"></i>
+    <h2>{{ 'GARAGE.EMPTY' | translate }}</h2>
+    <p>{{ 'GARAGE.EMPTY_HINT' | translate }}</p>
+  </div>
+
+    <div class="bikes-grid" *ngIf="bikes.length > 0">
+    <div class="bike-card" *ngFor="let bike of bikes" [class.primary]="bike.isPrimary">
+      <div class="bike-badge" *ngIf="bike.isPrimary">{{ 'GARAGE.PRIMARY' | translate }}</div>
+      <div class="bike-icon"><i class="pi pi-flag-fill"></i></div>
+      <h3>{{ bike.nickname || bike.make + ' ' + bike.model }}</h3>
+      <p class="bike-details">{{ bike.make }} {{ bike.model }} · {{ bike.year }}</p>
+      <div class="bike-actions">
+        <button *ngIf="!bike.isPrimary" class="btn-sm" (click)="setPrimary(bike.id)">
+          {{ 'GARAGE.SET_PRIMARY' | translate }}
+        </button>
+        <button class="btn-sm btn-danger" (click)="removeBike(bike.id)">
+          <i class="pi pi-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="garage-info" *ngIf="bikes.length > 0">
+    <i class="pi pi-info-circle"></i>
+    <p>{{ 'GARAGE.FITMENT_HINT' | translate }}</p>
+  </div>
+</div>

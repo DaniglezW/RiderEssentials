@@ -1,0 +1,31 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1><i class="pi pi-heart"></i> {{ 'WISHLIST.TITLE' | translate }}</h1>
+    <p>{{ 'WISHLIST.SUBTITLE' | translate }}</p>
+  </div>
+
+  <div class="empty-state" *ngIf="items.length === 0">
+    <i class="pi pi-heart"></i>
+    <h2>{{ 'WISHLIST.EMPTY' | translate }}</h2>
+    <p>{{ 'WISHLIST.EMPTY_HINT' | translate }}</p>
+    <a routerLink="/catalog" class="btn-primary">{{ 'WISHLIST.BROWSE' | translate }}</a>
+  </div>
+
+  <div class="wishlist-grid" *ngIf="items.length > 0">
+    <div class="wishlist-card" *ngFor="let product of items">
+      <button class="remove-wish" (click)="remove(product.productId)" aria-label="Remove">
+        <i class="pi pi-times"></i>
+      </button>
+      <img [src]="product.image" [alt]="product.name" (click)="goToProduct(product)" />
+      <div class="card-body">
+        <span class="brand">{{ enrichment.getMeta(product).brand }}</span>
+        <h3 (click)="goToProduct(product)">{{ product.name }}</h3>
+        <p-rating [ngModel]="enrichment.getMeta(product).rating" [readonly]="true" [cancel]="false"></p-rating>
+        <span class="price">{{ formatPrice(product.price) }}</span>
+        <button class="btn-add" (click)="addToCart(product)">
+          <i class="pi pi-shopping-cart"></i> {{ 'PRODUCT.ADD_TO_CART' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

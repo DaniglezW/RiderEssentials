@@ -1,11 +1,7 @@
 <div>
-  <app-product-container *ngIf="!loading" [product]="product" ></app-product-container>
-  <div *ngIf="loading" class="d-flex justify-content-center spinner-container">
-    <span class="spinner-border spinner-border-sm size-spinner"></span>
-  </div>
-  <br />
-  <app-product-list-component *ngIf="!loadingList" [products]="productList" ></app-product-list-component>
-  <div *ngIf="loadingList" class="d-flex justify-content-center spinner-container">
-    <span class="spinner-border spinner-border-sm size-spinner"></span>
-  </div>
+  <app-product-container *ngIf="!loading" [product]="product"></app-product-container>
+  <app-loading-spinner *ngIf="loading" minHeight="240px"></app-loading-spinner>
+
+  <app-product-list-component *ngIf="!loadingList" [products]="productList"></app-product-list-component>
+  <app-loading-spinner *ngIf="loadingList" minHeight="180px"></app-loading-spinner>
 </div>

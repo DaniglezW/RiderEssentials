@@ -1,45 +1,54 @@
 <div class="filter-body">
-  <form>
-    <div class="card flex justify-content-center">
-      <div class="card-conteiner">
-        <div class="card-content">
-          <div class="card-title">Price <span>Range</span></div>
-          <div class="values">
-            <div><span>{{ convertPrice(minPrice) }}</span></div> -
-            <div><span>{{ convertPrice(maxPrice) }}</span></div>
-          </div>
-          <div class="slider">
-            <label class="label-min-value">{{ convertPrice(1) }}</label>
-            <label class="label-max-value">{{ convertPrice(5000) }}</label>
-          </div>
-          <div class="rangeslider">
-            <input class="min input-ranges" name="range_1" type="range" min="1" max="5000" [(ngModel)]="minPrice"
-              [value]="minPrice">
-            <input class="max input-ranges" name="range_2" type="range" min="1" max="5000" [(ngModel)]="maxPrice"
-              [value]="maxPrice">
-          </div>
-          <button type="submit" (click)="searchWithPrice()" >Filtrar</button>
-        </div>
-      </div>
+  <div class="filter-section">
+    <h3 class="filter-title">{{ 'FILTER.PRICE' | translate }}</h3>
+    <div class="price-values">
+      <span>{{ convertPrice(minPrice) }}</span>
+      <span class="sep">—</span>
+      <span>{{ convertPrice(maxPrice) }}</span>
     </div>
-  </form>
-  <br>
-  <div class="card flex justify-content-center">
-    <div class="card-conteiner">
-      <div class="card-content">
-        <div class="card-title">Categories</div>
+    <div class="rangeslider">
+      <input
+        class="min input-ranges"
+        [class.is-front]="activeThumb === 'min'"
+        type="range"
+        min="1"
+        max="5000"
+        [(ngModel)]="minPrice"
+        (pointerdown)="activeThumb = 'min'"
+      />
+      <input
+        class="max input-ranges"
+        [class.is-front]="activeThumb === 'max'"
+        type="range"
+        min="1"
+        max="5000"
+        [(ngModel)]="maxPrice"
+        (pointerdown)="activeThumb = 'max'"
+      />
+    </div>
+    <button type="button" class="filter-btn" (click)="searchWithPrice()">
+      {{ 'FILTER.APPLY' | translate }}
+    </button>
+  </div>
 
-        <div class="dropdown" (click)="toggleDropdown()">
-          <button class="dropdown-button">
-            <span id="current-category">{{ selectedCategory?.name || 'All Categories' }}</span>
-          </button>
-          <div class="dropdown-content" [ngClass]="{'show': dropdownOpen}">
-            <a *ngFor="let category of allCategories" (click)="selectCategory($event, category)">
-              {{ category.name }}
-            </a>
-          </div>
-        </div>
-      </div>
+  <div class="filter-section">
+    <h3 class="filter-title">{{ 'FILTER.CATEGORY' | translate }}</h3>
+    <div class="category-list">
+      <button
+        *ngFor="let category of allCategories"
+        class="category-chip"
+        [class.active]="selectedCategory?.categoryId === category.categoryId"
+        (click)="selectCategory($event, category)"
+      >
+        <span *ngIf="category.categoryId === 0">{{ 'FILTER.ALL_CATEGORIES' | translate }}</span>
+        <span *ngIf="category.categoryId !== 0">{{ 'body.category.' + category.name.trim() | translate }}</span>
+      </button>
     </div>
+  </div>
+
+  <div class="filter-section filter-promo">
+    <i class="pi pi-percentage"></i>
+    <p>{{ 'FILTER.PROMO' | translate }}</p>
+    <code>MOTO10</code>
   </div>
 </div>

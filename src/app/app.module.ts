@@ -1,5 +1,6 @@
-import { HttpClient, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_INITIALIZER, DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +21,7 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { ProductService } from './modules/product/services/productService.service';
 import { CatalogService } from './modules/catalog/services/catalog.service';
+import { UserEmailInterceptor } from './core/interceptors/user-email.interceptor';
 
 registerLocaleData(localeEs, 'es');
 
@@ -42,6 +44,7 @@ export function loadConfig(configService: ConfigService) {
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -71,7 +74,12 @@ export function loadConfig(configService: ConfigService) {
     CurrencyService,
     ConfigService,
     ProductService,
-    CatalogService
+    CatalogService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UserEmailInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

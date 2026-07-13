@@ -1,21 +1,42 @@
-<div class="header-container">
-  <h2 class="category-title">{{ "body.category.category" | translate }}{{ "body.category." + products[0].category.name.trim() | translate }}</h2>
+<div class="list-header" *ngIf="products?.length">
+  <h2 class="list-title">
+    {{ 'body.category.category' | translate }}{{ 'body.category.' + products[0].category.name.trim() | translate }}
+  </h2>
+  <span class="result-count">{{ products.length }} {{ 'CATALOG.PRODUCTS' | translate }}</span>
 </div>
 
-<div class="cards-container">
-  <div 
-    class="card" 
-    *ngFor="let product of products" 
-    [routerLink]="['/product', product.productId]" 
-    style="cursor: pointer;"
+<div class="cards-container" *ngIf="products?.length">
+  <article
+    class="product-card"
+    *ngFor="let product of products"
+    [routerLink]="['/product', product.productId]"
   >
-    <ng-container *ngIf="product.image">
-      <img [src]="product.image" alt="Product Image" class="card__image" />
-    </ng-container>
-    <div class="card__content">
-      <p class="card__title">{{ product.name }}</p>
-      <p class="card__description">{{ product.description | truncate }}</p>
-      <p class="card__price">{{ convertPrice(product.price) }}</p>
+    <div class="card-badges">
+      <span class="badge badge--stock" *ngIf="enrichment.getMeta(product).inStock">{{ 'CATALOG.IN_STOCK' | translate }}</span>
+      <span class="badge badge--nostock" *ngIf="!enrichment.getMeta(product).inStock">{{ 'CATALOG.OUT_OF_STOCK' | translate }}</span>
     </div>
-  </div>
+    <button
+      class="wishlist-btn"
+      [class.active]="isWishlisted(product.productId)"
+      (click)="toggleWishlist($event, product)"
+    >
+      <i class="pi" [ngClass]="isWishlisted(product.productId) ? 'pi-heart-fill' : 'pi-heart'"></i>
+    </button>
+    <div class="card-image">
+      <img *ngIf="product.image" [src]="product.image" [alt]="product.name" />
+    </div>
+    <div class="card-body">
+      <span class="card-brand">{{ enrichment.getMeta(product).brand }}</span>
+      <h3 class="card-title">{{ product.name }}</h3>
+      <div class="card-rating">
+        <p-rating [ngModel]="enrichment.getMeta(product).rating" [readonly]="true" [cancel]="false"></p-rating>
+      </div>
+      <div class="card-footer">
+        <span class="card-price">{{ convertPrice(product.price) }}</span>
+        <button class="quick-add" (click)="quickAdd($event, product)">
+          <i class="pi pi-shopping-cart"></i>
+        </button>
+      </div>
+    </div>
+  </article>
 </div>

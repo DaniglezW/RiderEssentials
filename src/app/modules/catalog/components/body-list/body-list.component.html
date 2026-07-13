@@ -1,41 +1,86 @@
-<div class="header-container" *ngIf="noPageable">
-  <h2 class="category-title">{{ "body.priceTitle.product" | translate }}{{ convertPrice(min) }}{{ "body.priceTitle.and" | translate }}{{ convertPrice(max) }}</h2>
+<div class="list-header" *ngIf="noPageable">
+  <h2 class="list-title">
+    {{ 'body.priceTitle.product' | translate }}{{ convertPrice(min) }}{{ 'body.priceTitle.and' | translate }}{{ convertPrice(max) }}
+  </h2>
 </div>
 
-<div class="cards-container" *ngIf="products.length > 0 else elseBlock">
-  <div 
-    class="card" 
-    *ngFor="let product of products" 
-    [routerLink]="['/product', product.productId]" 
-    style="cursor: pointer;"
-  >
-    <ng-container *ngIf="product.image">
-      <img [src]="product.image" alt="Product Image" class="card__image" />
-    </ng-container>
-    <div class="card__content">
-      <p class="card__title">{{ product.name }}</p>
-      <p class="card__description">{{ product.description | truncate }}</p>
-      <p class="card__price">{{ convertPrice(product.price) }}</p>
-    </div>
+<div class="toolbar" *ngIf="products.length > 0">
+  <span class="result-count">{{ products.length }} {{ 'CATALOG.PRODUCTS' | translate }}</span>
+  <div class="sort-control">
+    <label>{{ 'CATALOG.SORT' | translate }}</label>
+    <select [(ngModel)]="localSort" (change)="onSortChange()">
+      <option value="default">{{ 'CATALOG.SORT_DEFAULT' | translate }}</option>
+      <option value="price-asc">{{ 'CATALOG.SORT_PRICE_ASC' | translate }}</option>
+      <option value="price-desc">{{ 'CATALOG.SORT_PRICE_DESC' | translate }}</option>
+      <option value="name">{{ 'CATALOG.SORT_NAME' | translate }}</option>
+    </select>
   </div>
 </div>
+
+<div class="cards-container" *ngIf="products.length > 0; else elseBlock">
+  <article
+    class="product-card"
+    *ngFor="let product of products"
+    [routerLink]="['/product', product.productId]"
+  >
+    <div class="card-badges">
+      <span class="badge badge--new" *ngIf="getMeta(product).isNew">{{ 'CATALOG.NEW' | translate }}</span>
+      <span class="badge badge--bestseller" *ngIf="getMeta(product).isBestseller">{{ 'CATALOG.BESTSELLER' | translate }}</span>
+      <span class="badge badge--stock" *ngIf="getMeta(product).inStock">{{ 'CATALOG.IN_STOCK' | translate }}</span>
+      <span class="badge badge--nostock" *ngIf="!getMeta(product).inStock">{{ 'CATALOG.OUT_OF_STOCK' | translate }}</span>
+    </div>
+
+    <button
+      class="wishlist-btn"
+      [class.active]="isWishlisted(product.productId)"
+      (click)="toggleWishlist($event, product)"
+      aria-label="Wishlist"
+    >
+      <i class="pi" [ngClass]="isWishlisted(product.productId) ? 'pi-heart-fill' : 'pi-heart'"></i>
+    </button>
+
+    <div class="card-image">
+      <img *ngIf="product.image" [src]="product.image" [alt]="product.name" />
+    </div>
+
+    <div class="card-body">
+      <span class="card-brand">{{ getMeta(product).brand }}</span>
+      <h3 class="card-title">{{ product.name }}</h3>
+      <div class="card-rating">
+        <p-rating [ngModel]="getMeta(product).rating" [readonly]="true" [cancel]="false"></p-rating>
+        <span class="review-count">({{ getMeta(product).reviewCount }})</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-price">{{ convertPrice(product.price) }}</span>
+        <button class="quick-add" (click)="quickAdd($event, product)" [disabled]="!getMeta(product).inStock">
+          <i class="pi pi-shopping-cart"></i>
+        </button>
+      </div>
+      <span class="free-ship" *ngIf="getMeta(product).hasFreeShipping">
+        <i class="pi pi-truck"></i> {{ 'CATALOG.FREE_SHIPPING' | translate }}
+      </span>
+    </div>
+  </article>
+</div>
+
 <ng-template #elseBlock>
-  <h1 class="no-products-title">{{ "body.noProducts" | translate }}</h1>
+  <div class="empty-state">
+    <i class="pi pi-search"></i>
+    <h2>{{ 'body.noProducts' | translate }}</h2>
+  </div>
 </ng-template>
 
-<div class="d-flex align-items-center mb-3" *ngIf="!noPageable && products.length > 0">
-  <h5 style="font-size: 18px; margin-right: 15px">
-      {{ "body.page" | translate
-      }}{{ page + 1 + "/" + pageProducts.totalPages }}
-  </h5>
+<div class="pagination-bar" *ngIf="!noPageable && products.length > 0">
+  <span class="page-label">{{ 'body.page' | translate }}{{ page + 1 }}/{{ pageProducts.totalPages || 1 }}</span>
   <p-paginator
-      (onPageChange)="onPageChange($any($event))"
-      [first]="first"
-      [rows]="rows"
-      [pageLinkSize]="5"
-      [totalRecords]="pageProducts.totalElements"
-      [rowsPerPageOptions]="[12, 24, 30]"
-      [showFirstLastIcon]="true"
-      [dropdownAppendTo]="'body'"
+    *ngIf="pageProducts"
+    (onPageChange)="onPageChange($any($event))"
+    [first]="first"
+    [rows]="rows"
+    [pageLinkSize]="5"
+    [totalRecords]="pageProducts.totalElements"
+    [rowsPerPageOptions]="[12, 24, 30]"
+    [showFirstLastIcon]="true"
+    [dropdownAppendTo]="'body'"
   ></p-paginator>
 </div>

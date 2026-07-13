@@ -4,17 +4,14 @@
   "body": {
     "page": "Pàgina ",
     "noProducts": "No hi ha productes disponibles per a aquesta cerca.",
-    "priceTitle": {
-      "product": "Productes entre ",
-      "and": " i "
-    },
+    "priceTitle": { "product": "Productes entre ", "and": " i " },
     "category": {
       "category": "Categoria: ",
       "Accesorios de Rendimiento": "Accessoris de Rendiment",
       "Lubricantes": "Lubricants",
       "Repuestos": "Recanvis",
       "Equipamiento": "Equipament",
-      "Neumáticos": "Pneumàtics",
+      "Neumáticos": "Neumàtics",
       "Accesorios Estéticos": "Accessoris Estètics",
       "Herramientas": "Eines",
       "Ropa": "Roba",
@@ -23,39 +20,24 @@
     }
   },
   "HEADER": {
-    "CONTACT": "Contacte",
-    "BRAND": "Rider Essentials",
-    "SEARCH_PLACEHOLDER": "Cerca",
-    "MY_ACCOUNT": "El meu compte",
-    "MENU": "Menú",
-    "FAQ": "FAQ",
-    "CHECKOUT": "Caixa",
-    "CATALOG": "Catàleg",
-    "CUSTOM": "Personalitzada",
-    "MANGA": "Manga",
-    "MINI": "Mini",
-    "ACCESSORIES": "Accessoris",
-    "BLOG": "Blog",
-    "REVIEWS": "Ressenyes",
-    "AFFILIATE": "Afiliat"
+    "CONTACT": "Contacte", "BRAND": "Rider Essentials",
+    "SEARCH_PLACEHOLDER": "Cercar accessoris, marques, peces...",
+    "MY_ACCOUNT": "El meu compte", "MY_GARAGE": "El meu garatge", "WISHLIST": "Favorits",
+    "MENU": "Menú", "FAQ": "FAQ", "CHECKOUT": "Cistella", "CATALOG": "Catàleg",
+    "FREE_SHIPPING": "Enviament gratuït en comandes superiors a 75€",
+    "CUSTOM": "Personalitzada", "MANGA": "Manga", "MINI": "Mini",
+    "ACCESSORIES": "Accessoris", "BLOG": "Blog", "REVIEWS": "Ressenyes", "AFFILIATE": "Afiliat"
   },
-  "footer": {
-    "help": "AJUDA",
-    "helpItems": {
-      "faq": "FAQ",
-      "contact": "Contacte",
-      "blog": "Blog"
-    },
-    "importantPages": "PÀGINES IMPORTANTES",
-    "importantPagesItems": {
-      "termsAndConditions": "1. Condicions generals de venda",
-      "legalInfo": "2. Informació jurídica",
-      "returnPolicy": "5. Polítiques de devolucions i reemborsaments",
-      "disclaimer": "6. Clàusula de no responsabilitat"
-    },
-    "information": "INFORMACIÓ",
-    "informationText": "Si teniu qualsevol pregunta o suggeriment, poseu-vos en contacte amb nosaltres i us respondrem en un termini de 24 hores, de dilluns a divendres entre les 9.00 i les 17.00 hores.",
-    "contactEmailF": "Contacte: contact",
-    "contactEmailS": "rider-essentials.com"
-  }
+  "CART": { "TITLE": "Cistella de compra", "EMPTY": "La teva cistella està buida", "CHECKOUT": "Finalitzar compra", "CLEAR": "Buidar cistella", "SHIPPING_NOTE": "Despeses d'enviament", "FREE_SHIPPING": "Enviament gratuït!" },
+  "CATALOG": { "HERO_TITLE": "Tot per a la teva moto", "HERO_SUBTITLE": "Accessoris, equipament, pneumàtics i recanvis de les millors marques", "HERO_CTA": "Configura la teva moto", "PRODUCTS": "productes", "SORT": "Ordenar", "SORT_DEFAULT": "Rellevància", "SORT_PRICE_ASC": "Preu: menor a major", "SORT_PRICE_DESC": "Preu: major a menor", "SORT_NAME": "Nom A-Z", "NEW": "Nou", "BESTSELLER": "Top vendes", "IN_STOCK": "En estoc", "OUT_OF_STOCK": "Esgotat", "FREE_SHIPPING": "Enviament gratuït", "LOADING_SLOW": "Carregant catàleg..." },
+  "FILTER": { "PRICE": "Rang de preu", "CATEGORY": "Categoria", "APPLY": "Filtrar", "ALL_CATEGORIES": "Totes les categories", "PROMO": "Usa el codi al checkout" },
+  "PRODUCT": { "ADD_TO_CART": "Afegir a la cistella", "SIZE": "Talla / Mida", "QUANTITY": "Quantitat", "DESCRIPTION": "Descripció", "CATEGORY": "Categoria", "BRAND": "Marca", "REVIEWS": "ressenyes", "WARRANTY": "Garantia", "YEARS": "anys", "FITS_BIKE": "Compatible amb la teva", "NOT_FITS_BIKE": "Verifica compatibilitat amb la teva", "ADD_BIKE": "Afegeix la teva moto", "FITMENT_HINT": "per verificar compatibilitat", "COMPATIBLE": "Compatible amb" },
+  "CHECKOUT": { "TITLE": "Finalitzar compra", "STEP_CART": "Cistella", "STEP_SHIPPING": "Enviament", "STEP_PAYMENT": "Pagament", "CONTINUE_SHIPPING": "Continuar a l'enviament", "CONTINUE_PAYMENT": "Continuar al pagament", "BACK": "Tornar", "FULL_NAME": "Nom complet", "STREET": "Adreça", "CITY": "Ciutat", "POSTAL_CODE": "Codi postal", "COUNTRY": "País", "PHONE": "Telèfon", "PAY_CARD": "Targeta de crèdit/dèbit", "PAY_TRANSFER": "Transferència bancària", "PLACE_ORDER": "Confirmar comanda", "SUMMARY": "Resum de la comanda", "SUBTOTAL": "Subtotal", "SHIPPING": "Enviament", "TOTAL": "Total", "FREE": "Gratuït", "FREE_SHIPPING_HINT": "Afegeix més productes per enviament gratuït (75€)", "COUPON_TITLE": "Codi promocional", "COUPON_PLACEHOLDER": "Ex: MOTO10", "COUPON_APPLY": "Aplicar", "COUPON_REMOVE": "Treure cupó", "COUPON_INVALID": "Codi no vàlid", "COUPON_APPLIED": "10% de descompte aplicat", "COUPON_DISCOUNT": "Descompte (MOTO10)", "COUPON_HINT": "Usa MOTO10 i obtén un 10% de descompte", "CONFIRMED": "Comanda confirmada!", "CONFIRMED_MSG": "Rebràs un email de confirmació aviat.", "ORDER_ID": "Número de comanda", "CONTINUE_SHOPPING": "Seguir comprant", "VIEW_ORDERS": "Veure les meves comandes" },
+  "WISHLIST": { "TITLE": "Els meus favorits", "SUBTITLE": "Productes guardats per més tard", "EMPTY": "No tens favorits", "EMPTY_HINT": "Guarda productes prement el cor al catàleg", "BROWSE": "Explorar catàleg" },
+  "GARAGE": { "TITLE": "El meu garatge", "SUBTITLE": "Gestiona les teves motos per veure productes compatibles", "ADD_BIKE": "Afegir moto", "NEW_BIKE": "Nova moto", "MAKE": "Marca", "MODEL": "Model", "YEAR": "Any", "NICKNAME": "Àlies (opcional)", "NICKNAME_PLACEHOLDER": "Ex: La meva daily", "SELECT_MAKE": "Selecciona marca", "SELECT_MODEL": "Selecciona model", "SAVE": "Desar moto", "EMPTY": "El teu garatge està buit", "EMPTY_HINT": "Afegeix la teva moto per veure productes compatibles", "PRIMARY": "Principal", "SET_PRIMARY": "Fer principal", "FITMENT_HINT": "Els productes mostraran compatibilitat amb la teva moto principal." },
+  "FAQ": { "TITLE": "Preguntes freqüents", "SUBTITLE": "Resolem els teus dubtes sobre compres, enviaments i devolucions", "Q1": "Quant triga l'enviament?", "A1": "Les comandes es processen en 24-48h laborables. L'enviament estàndard triga 3-5 dies a Espanya.", "Q2": "Puc retornar un producte?", "A2": "Sí, tens 30 dies per retornar qualsevol producte sense usar i en el seu embalatge original.", "Q3": "Com sé si un accessori és compatible?", "A3": "Configura la teva moto a 'El meu garatge' i veuràs indicadors de compatibilitat.", "Q4": "Quins mètodes de pagament accepteu?", "A4": "Targeta, PayPal, Bizum i transferència bancària.", "Q5": "Els productes tenen garantia?", "A5": "Tots els productes tenen garantia oficial de mínim 2 anys.", "Q6": "Feu enviaments internacionals?", "A6": "Sí, enviem a tota la Unió Europea.", "STILL_QUESTIONS": "Tens més preguntes?", "CONTACT_US": "Contacta'ns" },
+  "CONTACT": { "TITLE": "Contacte", "SUBTITLE": "Som aquí per ajudar-te. Resposta en menys de 24h.", "EMAIL": "Email", "HOURS": "Horari", "HOURS_DETAIL": "Dilluns a divendres, 9:00 - 17:00", "PHONE": "Telèfon", "ADDRESS": "Adreça", "ADDRESS_DETAIL": "Polígon Industrial Rider, 28001 Madrid, Espanya", "NAME": "Nom", "EMAIL_LABEL": "Email", "SUBJECT": "Assumpte", "SUBJECT_GENERAL": "Consulta general", "SUBJECT_ORDER": "Estat de la meva comanda", "SUBJECT_RETURNS": "Devolucions", "SUBJECT_FITMENT": "Compatibilitat de producte", "SUBJECT_WHOLESALE": "Distribució / Majorista", "MESSAGE": "Missatge", "SEND": "Enviar missatge", "SUCCESS": "Missatge enviat!", "SUCCESS_MSG": "Et respondrem en menys de 24 hores laborables.", "SEND_ANOTHER": "Enviar un altre missatge" },
+  "PROFILE": { "ORDERS": "Les meves comandes", "WISHLIST": "Favorits", "GARAGE": "El meu garatge", "SETTINGS": "Configuració", "NO_ORDERS": "Encara no has fet cap comanda", "ITEMS_SAVED": "productes guardats", "VIEW_WISHLIST": "Veure llista de favorits", "MANAGE_GARAGE": "Gestionar garatge", "SAVE": "Desar canvis", "STATUS_CONFIRMED": "Confirmat", "STATUS_SHIPPED": "Enviat", "STATUS_DELIVERED": "Lliurat", "STATUS_PENDING": "Pendent" },
+  "FOOTER": { "TAGLINE": "La teva botiga de confiança per a accessoris i equipament de moto.", "SECURE": "Pagament segur", "FAST_SHIPPING": "Enviament ràpid", "RETURNS": "Devolucions 30 dies", "RIGHTS": "Tots els drets reservats." },
+  "footer": { "help": "AJUDA", "helpItems": { "faq": "FAQ", "contact": "Contacte", "blog": "Blog" }, "importantPages": "PÀGINES IMPORTANTS", "importantPagesItems": { "termsAndConditions": "Condicions generals de venda", "legalInfo": "Informació jurídica", "returnPolicy": "Política de devolucions", "disclaimer": "Clàusula de no responsabilitat" }, "information": "INFORMACIÓ", "informationText": "Si tens alguna pregunta, contacta'ns i et respondrem en 24 hores.", "contactEmailF": "Contacte: contact", "contactEmailS": "rider-essentials.com" }
 }

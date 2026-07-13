@@ -4,13 +4,10 @@
   "body": {
     "page": "Página ",
     "noProducts": "Não há produtos disponíveis para esta pesquisa.",
-    "priceTitle": {
-      "product": "Produtos entre ",
-      "and": " e "
-    },
+    "priceTitle": { "product": "Produtos entre ", "and": " e " },
     "category": {
       "category": "Categoria: ",
-      "Accesorios de Rendimiento": "Acessórios de Desempenho",
+      "Accesorios de Rendimiento": "Acessórios de Performance",
       "Lubricantes": "Lubrificantes",
       "Repuestos": "Peças de Reposição",
       "Equipamiento": "Equipamento",
@@ -18,44 +15,29 @@
       "Accesorios Estéticos": "Acessórios Estéticos",
       "Herramientas": "Ferramentas",
       "Ropa": "Roupa",
-      "Electrónica": "Eletrônica",
+      "Electrónica": "Eletrónica",
       "Protecciones": "Proteções"
     }
   },
   "HEADER": {
-    "CONTACT": "Contato",
-    "BRAND": "Rider Essentials",
-    "SEARCH_PLACEHOLDER": "Pesquisar",
-    "MY_ACCOUNT": "Minha conta",
-    "MENU": "Menu",
-    "FAQ": "FAQ",
-    "CHECKOUT": "Caixa",
-    "CATALOG": "Catálogo",
-    "CUSTOM": "Personalizada",
-    "MANGA": "Manga",
-    "MINI": "Mini",
-    "ACCESSORIES": "Acessórios",
-    "BLOG": "Blog",
-    "REVIEWS": "Avaliações",
-    "AFFILIATE": "Afiliado"
+    "CONTACT": "Contacto", "BRAND": "Rider Essentials",
+    "SEARCH_PLACEHOLDER": "Pesquisar acessórios, marcas, peças...",
+    "MY_ACCOUNT": "A minha conta", "MY_GARAGE": "A minha garagem", "WISHLIST": "Favoritos",
+    "MENU": "Menu", "FAQ": "FAQ", "CHECKOUT": "Carrinho", "CATALOG": "Catálogo",
+    "FREE_SHIPPING": "Envio grátis em encomendas superiores a 75€",
+    "CUSTOM": "Personalizada", "MANGA": "Manga", "MINI": "Mini",
+    "ACCESSORIES": "Acessórios", "BLOG": "Blog", "REVIEWS": "Avaliações", "AFFILIATE": "Afiliado"
   },
-  "footer": {
-    "help": "AJUDA",
-    "helpItems": {
-      "faq": "FAQ",
-      "contact": "Contato",
-      "blog": "Blog"
-    },
-    "importantPages": "PÁGINAS IMPORTANTES",
-    "importantPagesItems": {
-      "termsAndConditions": "1. Condições gerais de venda",
-      "legalInfo": "2. Informação jurídica",
-      "returnPolicy": "5. Políticas de devoluções e reembolsos",
-      "disclaimer": "6. Cláusula de isenção de responsabilidade"
-    },
-    "information": "INFORMAÇÕES",
-    "informationText": "Se você tiver alguma dúvida ou sugestão, entre em contato conosco e responderemos em até 24 horas, de segunda a sexta-feira, entre 9h00 e 17h00.",
-    "contactEmailF": "Contacto: contact",
-    "contactEmailS": "rider-essentials.com"
-  }
+  "CART": { "TITLE": "Carrinho de compras", "EMPTY": "O seu carrinho está vazio", "CHECKOUT": "Finalizar compra", "CLEAR": "Esvaziar carrinho", "SHIPPING_NOTE": "Custos de envio", "FREE_SHIPPING": "Envio grátis!" },
+  "CATALOG": { "HERO_TITLE": "Tudo para a sua moto", "HERO_SUBTITLE": "Acessórios, equipamento, pneus e peças das melhores marcas", "HERO_CTA": "Configure a sua moto", "PRODUCTS": "produtos", "SORT": "Ordenar", "SORT_DEFAULT": "Relevância", "SORT_PRICE_ASC": "Preço: menor a maior", "SORT_PRICE_DESC": "Preço: maior a menor", "SORT_NAME": "Nome A-Z", "NEW": "Novo", "BESTSELLER": "Mais vendido", "IN_STOCK": "Em stock", "OUT_OF_STOCK": "Esgotado", "FREE_SHIPPING": "Envio grátis", "LOADING_SLOW": "A carregar catálogo..." },
+  "FILTER": { "PRICE": "Intervalo de preço", "CATEGORY": "Categoria", "APPLY": "Filtrar", "ALL_CATEGORIES": "Todas as categorias", "PROMO": "Use o código no checkout" },
+  "PRODUCT": { "ADD_TO_CART": "Adicionar ao carrinho", "SIZE": "Tamanho / Medida", "QUANTITY": "Quantidade", "DESCRIPTION": "Descrição", "CATEGORY": "Categoria", "BRAND": "Marca", "REVIEWS": "avaliações", "WARRANTY": "Garantia", "YEARS": "anos", "FITS_BIKE": "Compatível com a sua", "NOT_FITS_BIKE": "Verifique compatibilidade com a sua", "ADD_BIKE": "Adicione a sua moto", "FITMENT_HINT": "para verificar compatibilidade", "COMPATIBLE": "Compatível com" },
+  "CHECKOUT": { "TITLE": "Finalizar compra", "STEP_CART": "Carrinho", "STEP_SHIPPING": "Envio", "STEP_PAYMENT": "Pagamento", "CONTINUE_SHIPPING": "Continuar para envio", "CONTINUE_PAYMENT": "Continuar para pagamento", "BACK": "Voltar", "FULL_NAME": "Nome completo", "STREET": "Morada", "CITY": "Cidade", "POSTAL_CODE": "Código postal", "COUNTRY": "País", "PHONE": "Telefone", "PAY_CARD": "Cartão de crédito/débito", "PAY_TRANSFER": "Transferência bancária", "PLACE_ORDER": "Confirmar encomenda", "SUMMARY": "Resumo da encomenda", "SUBTOTAL": "Subtotal", "SHIPPING": "Envio", "TOTAL": "Total", "FREE": "Grátis", "FREE_SHIPPING_HINT": "Adicione mais produtos para envio grátis (75€)", "COUPON_TITLE": "Código promocional", "COUPON_PLACEHOLDER": "Ex: MOTO10", "COUPON_APPLY": "Aplicar", "COUPON_REMOVE": "Remover cupão", "COUPON_INVALID": "Código inválido", "COUPON_APPLIED": "10% de desconto aplicado", "COUPON_DISCOUNT": "Desconto (MOTO10)", "COUPON_HINT": "Use MOTO10 e obtenha 10% de desconto", "CONFIRMED": "Encomenda confirmada!", "CONFIRMED_MSG": "Receberá um email de confirmação em breve.", "ORDER_ID": "Número de encomenda", "CONTINUE_SHOPPING": "Continuar a comprar", "VIEW_ORDERS": "Ver as minhas encomendas" },
+  "WISHLIST": { "TITLE": "Os meus favoritos", "SUBTITLE": "Produtos guardados para mais tarde", "EMPTY": "Não tem favoritos", "EMPTY_HINT": "Guarde produtos clicando no coração no catálogo", "BROWSE": "Explorar catálogo" },
+  "GARAGE": { "TITLE": "A minha garagem", "SUBTITLE": "Gerencie as suas motos para ver produtos compatíveis", "ADD_BIKE": "Adicionar moto", "NEW_BIKE": "Nova moto", "MAKE": "Marca", "MODEL": "Modelo", "YEAR": "Ano", "NICKNAME": "Alcunha (opcional)", "NICKNAME_PLACEHOLDER": "Ex: A minha daily", "SELECT_MAKE": "Selecione a marca", "SELECT_MODEL": "Selecione o modelo", "SAVE": "Guardar moto", "EMPTY": "A sua garagem está vazia", "EMPTY_HINT": "Adicione a sua moto para ver produtos compatíveis", "PRIMARY": "Principal", "SET_PRIMARY": "Definir como principal", "FITMENT_HINT": "Os produtos mostrarão compatibilidade com a sua moto principal." },
+  "FAQ": { "TITLE": "Perguntas frequentes", "SUBTITLE": "Respondemos às suas dúvidas sobre compras, envios e devoluções", "Q1": "Quanto tempo demora o envio?", "A1": "As encomendas são processadas em 24-48h úteis. O envio padrão demora 3-5 dias em Espanha.", "Q2": "Posso devolver um produto?", "A2": "Sim, tem 30 dias para devolver qualquer produto sem usar na embalagem original.", "Q3": "Como sei se um acessório é compatível?", "A3": "Configure a sua moto em 'A minha garagem' e verá indicadores de compatibilidade.", "Q4": "Que métodos de pagamento aceitam?", "A4": "Cartão, PayPal, Bizum e transferência bancária.", "Q5": "Os produtos têm garantia?", "A5": "Todos os produtos têm garantia oficial de mínimo 2 anos.", "Q6": "Fazem envios internacionais?", "A6": "Sim, enviamos para toda a União Europeia.", "STILL_QUESTIONS": "Tem mais perguntas?", "CONTACT_US": "Contacte-nos" },
+  "CONTACT": { "TITLE": "Contacto", "SUBTITLE": "Estamos aqui para ajudar. Resposta em menos de 24h.", "EMAIL": "Email", "HOURS": "Horário", "HOURS_DETAIL": "Segunda a sexta, 9:00 - 17:00", "PHONE": "Telefone", "ADDRESS": "Morada", "ADDRESS_DETAIL": "Parque Industrial Rider, 28001 Madrid, Espanha", "NAME": "Nome", "EMAIL_LABEL": "Email", "SUBJECT": "Assunto", "SUBJECT_GENERAL": "Consulta geral", "SUBJECT_ORDER": "Estado da minha encomenda", "SUBJECT_RETURNS": "Devoluções", "SUBJECT_FITMENT": "Compatibilidade de produto", "SUBJECT_WHOLESALE": "Distribuição / Grossista", "MESSAGE": "Mensagem", "SEND": "Enviar mensagem", "SUCCESS": "Mensagem enviada!", "SUCCESS_MSG": "Responderemos em menos de 24 horas úteis.", "SEND_ANOTHER": "Enviar outra mensagem" },
+  "PROFILE": { "ORDERS": "As minhas encomendas", "WISHLIST": "Favoritos", "GARAGE": "A minha garagem", "SETTINGS": "Configurações", "NO_ORDERS": "Ainda não fez nenhuma encomenda", "ITEMS_SAVED": "produtos guardados", "VIEW_WISHLIST": "Ver lista de favoritos", "MANAGE_GARAGE": "Gerir garagem", "SAVE": "Guardar alterações", "STATUS_CONFIRMED": "Confirmado", "STATUS_SHIPPED": "Enviado", "STATUS_DELIVERED": "Entregue", "STATUS_PENDING": "Pendente" },
+  "FOOTER": { "TAGLINE": "A sua loja de confiança para acessórios e equipamento de moto.", "SECURE": "Pagamento seguro", "FAST_SHIPPING": "Envio rápido", "RETURNS": "Devoluções 30 dias", "RIGHTS": "Todos os direitos reservados." },
+  "footer": { "help": "AJUDA", "helpItems": { "faq": "FAQ", "contact": "Contacto", "blog": "Blog" }, "importantPages": "PÁGINAS IMPORTANTES", "importantPagesItems": { "termsAndConditions": "Condições gerais de venda", "legalInfo": "Informação jurídica", "returnPolicy": "Política de devoluções", "disclaimer": "Cláusula de não responsabilidade" }, "information": "INFORMAÇÃO", "informationText": "Se tiver alguma questão, contacte-nos e responderemos em 24 horas.", "contactEmailF": "Contacto: contact", "contactEmailS": "rider-essentials.com" }
 }

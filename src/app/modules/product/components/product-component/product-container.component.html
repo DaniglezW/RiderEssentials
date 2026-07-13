@@ -1,42 +1,109 @@
 <div class="product-page" *ngIf="product">
   <div class="image-section">
-      <img [src]="product.image" [alt]="product.name">
+    <div class="image-wrap">
+      <img [src]="product.image" [alt]="product.name" />
+      <span class="badge badge--bestseller" *ngIf="meta.isBestseller">{{ 'CATALOG.BESTSELLER' | translate }}</span>
+      <span class="badge badge--new" *ngIf="meta.isNew">{{ 'CATALOG.NEW' | translate }}</span>
+    </div>
   </div>
+
   <div class="details-section">
-      <h1><strong>{{ product.name }}</strong></h1>
+    <span class="product-brand">{{ meta.brand }}</span>
+    <h1>{{ product.name }}</h1>
+
+    <div class="rating-row">
+      <p-rating [ngModel]="meta.rating" [readonly]="true" [cancel]="false"></p-rating>
+      <span class="review-count">{{ meta.reviewCount }} {{ 'PRODUCT.REVIEWS' | translate }}</span>
+    </div>
+
+    <div class="price-row">
       <span class="price">{{ convertPrice(product.price) }}</span>
+      <span class="stock in-stock" *ngIf="meta.inStock">
+        <i class="pi pi-check-circle"></i> {{ 'CATALOG.IN_STOCK' | translate }} ({{ meta.stockCount }})
+      </span>
+      <span class="stock out-stock" *ngIf="!meta.inStock">
+        <i class="pi pi-times-circle"></i> {{ 'CATALOG.OUT_OF_STOCK' | translate }}
+      </span>
+    </div>
 
-      <form class="product-options">
-        <div *ngIf="product.category.categoryId == 4 || product.category.categoryId == 8">
-          <label for="size">Talla</label>
-          <select id="size" name="size">
-            <option value="">Escoge una opción</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-          </select>
+    <div class="free-shipping" *ngIf="meta.hasFreeShipping">
+      <i class="pi pi-truck"></i> {{ 'CATALOG.FREE_SHIPPING' | translate }}
+    </div>
+
+    <div class="fitment-box" [class.compatible]="isCompatible()" [class.incompatible]="!isCompatible()">
+      <i class="pi" [ngClass]="isCompatible() ? 'pi-check-circle' : 'pi-exclamation-triangle'"></i>
+      <div>
+        <strong *ngIf="primaryBike && isCompatible()">{{ 'PRODUCT.FITS_BIKE' | translate }} {{ primaryBike }}</strong>
+        <strong *ngIf="primaryBike && !isCompatible()">{{ 'PRODUCT.NOT_FITS_BIKE' | translate }}</strong>
+        <span *ngIf="!primaryBike">
+          <a routerLink="/garage">{{ 'PRODUCT.ADD_BIKE' | translate }}</a> {{ 'PRODUCT.FITMENT_HINT' | translate }}
+        </span>
+        <p class="compatible-makes">{{ 'PRODUCT.COMPATIBLE' | translate }}: {{ meta.compatibleMakes.join(', ') }}</p>
+      </div>
+    </div>
+
+    <div class="product-options">
+      <div class="option-group" *ngIf="sizeOptions.length > 0">
+        <label>{{ 'PRODUCT.SIZE' | translate }}</label>
+        <div class="size-buttons">
+          <button
+            *ngFor="let size of sizeOptions"
+            type="button"
+            class="size-btn"
+            [class.selected]="selectedSize === size"
+            (click)="selectedSize = size"
+          >{{ size }}</button>
         </div>
-
-          <div class="quantity">
-              <input type="number" value="1" min="1">
-          </div>
-
-          <button type="button" class="add-to-cart" (click)="addToCart()">Añadir al carrito</button>
-      </form>
-
-      <div class="description">
-          <h2>Descripción</h2>
-          <p>{{ product.description }}</p>
       </div>
 
-      <div class="additional-info">
-          <h2>Información Adicional</h2>
-          <p>Categoría: {{ product.category.name }}</p>
-          <p *ngIf="product.created_at">Creado el: {{ product.created_at | date: 'dd/MM/yyyy' }}</p>
-          <p *ngIf="product.updated_at">Última actualización: {{ product.updated_at | date: 'dd/MM/yyyy' }}</p>
+      <div class="option-group">
+        <label>{{ 'PRODUCT.QUANTITY' | translate }}</label>
+        <div class="qty-control">
+          <button type="button" (click)="decrementQty()">−</button>
+          <span>{{ quantity }}</span>
+          <button type="button" (click)="incrementQty()">+</button>
+        </div>
       </div>
 
+      <div class="action-buttons">
+        <button type="button" class="add-to-cart" (click)="addToCart()" [disabled]="!meta.inStock">
+          <i class="pi pi-shopping-cart"></i> {{ 'PRODUCT.ADD_TO_CART' | translate }}
+        </button>
+        <button type="button" class="wishlist-btn" [class.active]="isWishlisted" (click)="toggleWishlist()">
+          <i class="pi" [ngClass]="isWishlisted ? 'pi-heart-fill' : 'pi-heart'"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="specs-grid">
+      <div class="spec-item">
+        <span class="spec-label">{{ 'PRODUCT.CATEGORY' | translate }}</span>
+        <span>{{ 'body.category.' + product.category.name.trim() | translate }}</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">{{ 'PRODUCT.BRAND' | translate }}</span>
+        <span>{{ meta.brand }}</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">SKU</span>
+        <span>RE-{{ product.productId | number:'4.0-0' }}</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">{{ 'PRODUCT.WARRANTY' | translate }}</span>
+        <span>2 {{ 'PRODUCT.YEARS' | translate }}</span>
+      </div>
+    </div>
+
+    <div class="description">
+      <h2>{{ 'PRODUCT.DESCRIPTION' | translate }}</h2>
+      <p>{{ product.description }}</p>
+    </div>
+
+    <div class="trust-row">
+      <span><i class="pi pi-shield"></i> {{ 'FOOTER.SECURE' | translate }}</span>
+      <span><i class="pi pi-refresh"></i> {{ 'FOOTER.RETURNS' | translate }}</span>
+      <span><i class="pi pi-truck"></i> {{ 'FOOTER.FAST_SHIPPING' | translate }}</span>
+    </div>
   </div>
 </div>
-<p-toast/>
+<p-toast />

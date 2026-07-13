@@ -1,18 +1,43 @@
-<div class="catalog-container">
-  <app-filter-body [categories]="categories" (getNextPage)="getProductsByCategory($event)" (searchWithFilter)="getProductsByFilter($event)" class="filter-body"></app-filter-body>
-  <app-body-list-category *ngIf="categoryCatalog && !loading" [products]="productsByCategory" ></app-body-list-category>
-  <app-body-list *ngIf="!categoryCatalog && !loading" [pageProducts]="products" [noPageable]="noPageable" [min]="min" [max]="max" (getNextPage)="getNextPage($event)" class="body-list" ></app-body-list>
+<div class="catalog-hero">
+  <div class="hero-content">
+    <h1>{{ 'CATALOG.HERO_TITLE' | translate }}</h1>
+    <p>{{ 'CATALOG.HERO_SUBTITLE' | translate }}</p>
+    <a routerLink="/garage" class="hero-cta">
+      <i class="pi pi-flag"></i> {{ 'CATALOG.HERO_CTA' | translate }}
+    </a>
+  </div>
+</div>
 
-  <div *ngIf="loading" class="spinner-container">
-    <div class="loader">
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
+<div class="catalog-container">
+  <app-filter-body
+    [categories]="categories"
+    (getNextPage)="getProductsByCategory($event)"
+    (searchWithFilter)="getProductsByFilter($event)"
+    class="filter-body"
+  ></app-filter-body>
+
+  <div class="catalog-main body-list">
+    <div class="catalog-toolbar" *ngIf="!loading">
+      <app-body-list-category
+        *ngIf="categoryCatalog"
+        [products]="productsByCategory"
+        [sortBy]="sortBy"
+      ></app-body-list-category>
+
+      <app-body-list
+        *ngIf="!categoryCatalog"
+        [pageProducts]="products"
+        [noPageable]="noPageable"
+        [min]="min"
+        [max]="max"
+        [sortBy]="sortBy"
+        (getNextPage)="getNextPage($event)"
+      ></app-body-list>
     </div>
-    <p *ngIf="showExtendedMessage" class="showExtendedMessage">Este proceso puede tardar un par de minutos...</p>
+
+    <app-loading-spinner
+      *ngIf="loading"
+      [message]="showExtendedMessage ? ('CATALOG.LOADING_SLOW' | translate) : null"
+    ></app-loading-spinner>
   </div>
 </div>

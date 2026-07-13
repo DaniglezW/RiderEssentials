@@ -18,6 +18,7 @@ export class FilterBodyComponent implements OnChanges, OnInit {
 
   minPrice: number = 20;
   maxPrice: number = 4000;
+  activeThumb: 'min' | 'max' = 'max';
 
   constructor(private currencyService: CurrencyService) {}
 

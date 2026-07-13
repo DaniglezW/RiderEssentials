@@ -1,1 +1,78 @@
-<h1>{{ 'language' | translate }}</h1>
+<div class="profile-page">
+  <div class="profile-header">
+    <div class="avatar">
+      <i class="pi pi-user"></i>
+    </div>
+    <div>
+      <h1>{{ user.name }}</h1>
+      <p>{{ user.email }}</p>
+    </div>
+  </div>
+
+  <p-tabView [(activeIndex)]="activeTab">
+    <p-tabPanel [header]="'PROFILE.ORDERS' | translate">
+      <div class="empty-tab" *ngIf="orders.length === 0">
+        <i class="pi pi-shopping-bag"></i>
+        <p>{{ 'PROFILE.NO_ORDERS' | translate }}</p>
+        <a routerLink="/catalog" class="btn-primary">{{ 'WISHLIST.BROWSE' | translate }}</a>
+      </div>
+      <div class="order-card" *ngFor="let order of orders">
+        <div class="order-header">
+          <div>
+            <strong>{{ order.id }}</strong>
+            <span class="order-date">{{ order.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+          </div>
+          <span class="order-status" [attr.data-status]="order.status">
+            {{ getStatusLabel(order.status) | translate }}
+          </span>
+        </div>
+        <div class="order-items">
+          <div class="order-item" *ngFor="let item of order.items">
+            <img [src]="item.image" [alt]="item.name" />
+            <span>{{ item.name }} × {{ item.quantity }}</span>
+          </div>
+        </div>
+        <div class="order-total">{{ 'CHECKOUT.TOTAL' | translate }}: {{ formatPrice(order.total) }}</div>
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel [header]="'PROFILE.WISHLIST' | translate">
+      <div class="empty-tab" *ngIf="wishlist.length === 0">
+        <i class="pi pi-heart"></i>
+        <p>{{ 'WISHLIST.EMPTY' | translate }}</p>
+        <a routerLink="/wishlist" class="btn-primary">{{ 'HEADER.WISHLIST' | translate }}</a>
+      </div>
+      <p *ngIf="wishlist.length > 0">{{ wishlist.length }} {{ 'PROFILE.ITEMS_SAVED' | translate }}</p>
+      <a *ngIf="wishlist.length > 0" routerLink="/wishlist" class="link-btn">{{ 'PROFILE.VIEW_WISHLIST' | translate }} →</a>
+    </p-tabPanel>
+
+    <p-tabPanel [header]="'PROFILE.GARAGE' | translate">
+      <div class="empty-tab" *ngIf="bikes.length === 0">
+        <i class="pi pi-flag"></i>
+        <p>{{ 'GARAGE.EMPTY' | translate }}</p>
+        <a routerLink="/garage" class="btn-primary">{{ 'GARAGE.ADD_BIKE' | translate }}</a>
+      </div>
+      <div class="bike-list" *ngIf="bikes.length > 0">
+        <div class="bike-item" *ngFor="let bike of bikes">
+          <i class="pi pi-flag-fill"></i>
+          <span>{{ bike.make }} {{ bike.model }} ({{ bike.year }})</span>
+        </div>
+        <a routerLink="/garage" class="link-btn">{{ 'PROFILE.MANAGE_GARAGE' | translate }} →</a>
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel [header]="'PROFILE.SETTINGS' | translate">
+      <form class="settings-form" (ngSubmit)="saveProfile()">
+        <div class="form-field">
+          <label>{{ 'CONTACT.NAME' | translate }}</label>
+          <input type="text" [(ngModel)]="user.name" name="name" />
+        </div>
+        <div class="form-field">
+          <label>{{ 'CONTACT.EMAIL_LABEL' | translate }}</label>
+          <input type="email" [(ngModel)]="user.email" name="email" />
+        </div>
+        <button type="submit" class="btn-primary">{{ 'PROFILE.SAVE' | translate }}</button>
+      </form>
+    </p-tabPanel>
+  </p-tabView>
+</div>

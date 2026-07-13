@@ -8,26 +8,26 @@ const routes: Routes = [
     path: 'catalog',
     component: LayoutComponent,
     loadChildren: () =>
-      import('./modules/catalog/catalog.module').then(
-        (m) => m.CatalogModule
-      ),
+      import('./modules/catalog/catalog.module').then((m) => m.CatalogModule),
   },
   {
     path: 'profile',
     component: LayoutComponent,
     loadChildren: () =>
-      import('./modules/profile/profile.module').then(
-        (m) => m.ProfileModule
-      ),
+      import('./modules/profile/profile.module').then((m) => m.ProfileModule),
   },
   {
     path: 'product/:productId',
     component: LayoutComponent,
     loadChildren: () =>
-      import('./modules/product/product.module').then(
-        (m) => m.ProductModule
-      ),
-  }
+      import('./modules/product/product.module').then((m) => m.ProductModule),
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./modules/pages/pages.module').then((m) => m.PagesModule),
+  },
 ];
 
 @NgModule({

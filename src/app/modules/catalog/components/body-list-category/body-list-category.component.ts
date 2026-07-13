@@ -1,6 +1,9 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Product } from '../../../../model/product';
 import { CurrencyService } from '../../../../services/currency.service';
+import { ProductEnrichmentService } from '@/app/services/product-enrichment.service';
+import { WishlistService } from '@/app/services/wishlist.service';
+import { CartService } from '@/app/services/CartService.service';
 
 @Component({
   selector: 'app-body-list-category',
@@ -8,33 +11,52 @@ import { CurrencyService } from '../../../../services/currency.service';
   styleUrls: ['./body-list-category.component.scss']
 })
 export class BodyListComponentCategory implements OnChanges {
-
   @Input() products!: Product[];
+  @Input() sortBy = 'default';
 
-  constructor(private cdr: ChangeDetectorRef, private currencyService: CurrencyService) { }
+  constructor(
+    private currencyService: CurrencyService,
+    public enrichment: ProductEnrichmentService,
+    private wishlistService: WishlistService,
+    private cartService: CartService
+  ) {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['products'] && this.products) {
-      this.products = this.products.filter(product => product.productId !== 9999);
-      this.products.forEach(product => {
-        if (product.image) {
-          product.image = `data:image/jpeg;base64,${product.image}`;
-        }
-      });
+      this.products = this.products
+        .filter((p) => p.productId !== 9999)
+        .map((p) => {
+          if (p.image && !p.image.startsWith('data:')) {
+            p.image = `data:image/jpeg;base64,${p.image}`;
+          }
+          return p;
+        });
     }
   }
 
-  convertDataToImage(data: number[], product: Product) {
-    const byteArray = new Uint8Array(data);
-    const blob = new Blob([byteArray], { type: 'image/png' });
-    const reader = new FileReader();
+  isWishlisted(productId: number): boolean {
+    return this.wishlistService.isInWishlist(productId);
+  }
 
-    reader.onload = (event: any) => {
-      product.imageUrl = event.target.result;
-      this.cdr.markForCheck();
-    };
+  toggleWishlist(event: Event, product: Product): void {
+    event.stopPropagation();
+    event.preventDefault();
+    this.wishlistService.toggle(product);
+  }
 
-    reader.readAsDataURL(blob);
+  quickAdd(event: Event, product: Product): void {
+    event.stopPropagation();
+    event.preventDefault();
+    const meta = this.enrichment.getMeta(product);
+    this.cartService.addToCart({
+      productId: product.productId,
+      name: product.name,
+      image: product.image,
+      price: product.price,
+      quantity: 1,
+      size: 'X',
+      brand: meta.brand,
+    });
   }
 
   convertPrice(priceInEuros: number): string {

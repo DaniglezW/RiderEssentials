@@ -1,74 +1,141 @@
 <header>
+  <div class="top-bar">
+    <span class="top-promo">
+      <i class="pi pi-truck"></i> {{ 'HEADER.FREE_SHIPPING' | translate }}
+    </span>
+    <span class="top-contact">
+      <i class="pi pi-phone"></i> +34 900 123 456
+    </span>
+  </div>
+
   <div class="main-bar">
-    <div class="logo">
-      <a href="/catalog">
-        <img src="../../../assets/img/logo3.jpg" alt="payment-methods">
-      </a>
-    </div>
+    <a routerLink="/catalog" class="logo">
+      <span class="logo-icon">🏍</span>
+      <span class="logo-text">
+        <strong>Rider</strong> Essentials
+      </span>
+    </a>
 
     <div class="search-inputs">
       <p-iconField iconPosition="left">
         <p-inputIcon styleClass="pi pi-search" />
-        <input type="text" pInputText placeholder="{{ 'HEADER.SEARCH_PLACEHOLDER' | translate }}" [(ngModel)]="searchTerm" (ngModelChange)="onSearch(searchTerm)" />
+        <input
+          type="text"
+          pInputText
+          [placeholder]="'HEADER.SEARCH_PLACEHOLDER' | translate"
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="onSearch(searchTerm)"
+        />
       </p-iconField>
     </div>
+
     <div class="user-actions">
-      <div class="action">
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
-          aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-          <i class="pi pi-shopping-cart text-2xl"></i>
-          <span>{{ 'HEADER.CHECKOUT' | translate }}</span>
-        </button>
-      </div>
+      <a routerLink="/garage" class="action-link" [title]="'HEADER.MY_GARAGE' | translate">
+        <i class="pi pi-flag"></i>
+        <span class="action-label">{{ 'HEADER.MY_GARAGE' | translate }}</span>
+      </a>
+      <a routerLink="/wishlist" class="action-link" [title]="'HEADER.WISHLIST' | translate">
+        <i class="pi pi-heart"></i>
+        <span class="action-label">{{ 'HEADER.WISHLIST' | translate }}</span>
+        <span class="badge-count" *ngIf="wishlistCount > 0">{{ wishlistCount }}</span>
+      </a>
+      <a routerLink="/profile" class="action-link" [title]="'HEADER.MY_ACCOUNT' | translate">
+        <i class="pi pi-user"></i>
+        <span class="action-label">{{ 'HEADER.MY_ACCOUNT' | translate }}</span>
+      </a>
+      <button
+        class="cart-btn"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasDarkNavbar"
+        aria-controls="offcanvasDarkNavbar"
+      >
+        <i class="pi pi-shopping-cart"></i>
+        <span class="action-label">{{ 'HEADER.CHECKOUT' | translate }}</span>
+        <span class="badge-count cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+      </button>
+
       <div class="dropdown" (click)="toggleDropdown()">
-        <button class="dropdown-button">
-          <img [src]="'assets/flags/' + selectedLanguage.code + '.png'" class="flag-icon" id="current-flag" />
-          <span id="current-language">{{ selectedLanguage.name }}</span>
+        <button class="dropdown-button" type="button">
+          <span class="flag-emoji">{{ selectedLanguage.flag }}</span>
+          <span>{{ selectedLanguage.code | uppercase }}</span>
         </button>
-        <div class="dropdown-content" [ngClass]="{'show': dropdownOpen}">
-          <a href="#" *ngFor="let language of languages" (click)="selectLanguage(language)">
-            <img [src]="'assets/flags/' + language.code + '.png'" class="flag-icon" /> {{ language.name }}
+        <div class="dropdown-content" [class.show]="dropdownOpen">
+          <a href="#" *ngFor="let language of languages" (click)="selectLanguage($event, language)">
+            <span class="flag-emoji">{{ language.flag }}</span> {{ language.name }}
           </a>
         </div>
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Carrito de Compras</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-  
-      <div class="offcanvas-body">
-        <div *ngIf="cartItems.length > 0" class="displey-containers">
-          <ul class="cart-items">
-            <li *ngFor="let item of cartItems" class="cart-item">
-              <img [src]="item.image" alt="{{ item.name }}" class="cart-item-image" />
-              <div class="cart-item-details">
-                <h5 title="{{ item.name }}">{{ item.name.substring(0, 20) }}...</h5> <!-- Tooltip con el nombre completo -->
-                <p *ngIf="item.size !== 'X'">Talla: {{ item.size }}</p>
-                <p>x {{ item.quantity }}</p>
-              </div>
-            </li>
-          </ul>
 
-          <div>
-            <hr>
-            <div class="cart-total">
-              <button class="btn btn-danger w-20" (click)="cleanShoppingCart()">
-                <i class="pi pi-eraser text-2xl"></i>
-              </button>
-              <h4>Total: {{ convertPrice(totalPrice) }}</h4>
+  <nav class="navigation">
+    <div class="nav-links">
+      <a routerLink="/catalog" routerLinkActive="active">{{ 'HEADER.CATALOG' | translate }}</a>
+      <a routerLink="/garage" routerLinkActive="active">{{ 'HEADER.MY_GARAGE' | translate }}</a>
+      <a routerLink="/faq" routerLinkActive="active">{{ 'HEADER.FAQ' | translate }}</a>
+      <a routerLink="/contact" routerLinkActive="active">{{ 'HEADER.CONTACT' | translate }}</a>
+    </div>
+  </nav>
+
+  <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">
+        <i class="pi pi-shopping-cart"></i> {{ 'CART.TITLE' | translate }}
+        <span class="cart-count-label" *ngIf="cartCount > 0">({{ cartCount }})</span>
+      </h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <div *ngIf="cartItems.length > 0" class="cart-panel">
+        <ul class="cart-items">
+          <li *ngFor="let item of cartItems" class="cart-item">
+            <img [src]="item.image" [alt]="item.name" class="cart-item-image" />
+            <div class="cart-item-details">
+              <h5>{{ item.name }}</h5>
+              <span class="item-brand" *ngIf="item.brand">{{ item.brand }}</span>
+              <p *ngIf="item.size !== 'X'">{{ 'PRODUCT.SIZE' | translate }}: {{ item.size }}</p>
+              <div class="item-qty-row">
+                <button class="qty-btn" (click)="updateQty(item, -1)">−</button>
+                <span>{{ item.quantity }}</span>
+                <button class="qty-btn" (click)="updateQty(item, 1)">+</button>
+                <span class="item-line-price">{{ convertPrice(item.price * item.quantity) }}</span>
+              </div>
             </div>
-            <button type="button" class="btn btn-primary total-price w-100" (click)="proceedToCheckout()">Pagar ahora</button>
+            <button class="remove-item" (click)="removeItem(item)">
+              <i class="pi pi-times"></i>
+            </button>
+          </li>
+        </ul>
+
+        <div class="cart-footer">
+          <div class="shipping-note" *ngIf="shippingCost > 0">
+            {{ 'CART.SHIPPING_NOTE' | translate }}: {{ convertPrice(shippingCost) }}
           </div>
+          <div class="shipping-note free" *ngIf="shippingCost === 0 && subtotal > 0">
+            <i class="pi pi-check"></i> {{ 'CART.FREE_SHIPPING' | translate }}
+          </div>
+          <div class="cart-total">
+            <span>{{ 'CHECKOUT.TOTAL' | translate }}</span>
+            <h4>{{ convertPrice(totalPrice) }}</h4>
+          </div>
+          <button type="button" class="btn-checkout" (click)="proceedToCheckout()">
+            {{ 'CART.CHECKOUT' | translate }}
+          </button>
+          <button type="button" class="btn-clear" (click)="cleanShoppingCart()">
+            <i class="pi pi-trash"></i> {{ 'CART.CLEAR' | translate }}
+          </button>
         </div>
-  
-        <div *ngIf="cartItems.length === 0">
-          <p>Tu carrito está vacío</p>
-        </div>
+      </div>
+
+      <div class="cart-empty" *ngIf="cartItems.length === 0">
+        <i class="pi pi-shopping-cart"></i>
+        <p>{{ 'CART.EMPTY' | translate }}</p>
+        <a routerLink="/catalog" class="btn-browse" data-bs-dismiss="offcanvas">
+          {{ 'WISHLIST.BROWSE' | translate }}
+        </a>
       </div>
     </div>
-  </div>  
+  </div>
 </header>

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ConfigService } from '../../../services/config.service';
 import { Category } from '../model/Category';
 import { PageProductResponse } from '../model/PageProductResponse';
-import { PageStateService } from '../view/catalog.component';
+import { PageStateService } from '@/app/core/services/page-state.service';
 import { Product } from '../../../model/product';
 
 @Injectable()

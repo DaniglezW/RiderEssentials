@@ -1,0 +1,184 @@
+<div class="checkout-page" *ngIf="!orderComplete">
+  <div class="checkout-header">
+    <h1>{{ 'CHECKOUT.TITLE' | translate }}</h1>
+    <div class="steps">
+      <span [class.active]="step >= 1" [class.done]="step > 1">1. {{ 'CHECKOUT.STEP_CART' | translate }}</span>
+      <span [class.active]="step >= 2" [class.done]="step > 2">2. {{ 'CHECKOUT.STEP_SHIPPING' | translate }}</span>
+      <span [class.active]="step >= 3">3. {{ 'CHECKOUT.STEP_PAYMENT' | translate }}</span>
+    </div>
+  </div>
+
+  <div class="checkout-body">
+    <div class="checkout-main">
+      <!-- Step 1: Cart review -->
+      <div class="step-content" *ngIf="step === 1">
+        <div class="cart-review">
+          <div class="cart-line" *ngFor="let item of cartItems">
+            <img [src]="item.image" [alt]="item.name" class="line-img" />
+            <div class="line-info">
+              <h4>{{ item.name }}</h4>
+              <span class="line-brand" *ngIf="item.brand">{{ item.brand }}</span>
+              <span *ngIf="item.size !== 'X'" class="line-size">{{ 'PRODUCT.SIZE' | translate }}: {{ item.size }}</span>
+            </div>
+            <div class="line-qty">
+              <button type="button" class="qty-btn" (click)="updateQty(item, -1)">−</button>
+              <span>{{ item.quantity }}</span>
+              <button type="button" class="qty-btn" (click)="updateQty(item, 1)">+</button>
+            </div>
+            <div class="line-price">{{ formatPrice(item.price * item.quantity) }}</div>
+            <button type="button" class="remove-btn" (click)="removeItem(item)" aria-label="Remove">
+              <i class="pi pi-trash"></i>
+            </button>
+          </div>
+        </div>
+        <div class="step-actions step-actions--single">
+          <button type="button" class="btn-primary" (click)="nextStep()">{{ 'CHECKOUT.CONTINUE_SHIPPING' | translate }}</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Shipping -->
+      <div class="step-content" *ngIf="step === 2">
+        <form class="shipping-form" (submit)="$event.preventDefault()">
+          <div class="form-row">
+            <label for="fullName">{{ 'CHECKOUT.FULL_NAME' | translate }}</label>
+            <input id="fullName" type="text" [(ngModel)]="address.fullName" name="fullName" required />
+          </div>
+          <div class="form-row">
+            <label for="street">{{ 'CHECKOUT.STREET' | translate }}</label>
+            <input id="street" type="text" [(ngModel)]="address.street" name="street" required />
+          </div>
+          <div class="form-row two-cols">
+            <div>
+              <label for="city">{{ 'CHECKOUT.CITY' | translate }}</label>
+              <input id="city" type="text" [(ngModel)]="address.city" name="city" required />
+            </div>
+            <div>
+              <label for="postalCode">{{ 'CHECKOUT.POSTAL_CODE' | translate }}</label>
+              <input id="postalCode" type="text" [(ngModel)]="address.postalCode" name="postalCode" required />
+            </div>
+          </div>
+          <div class="form-row two-cols">
+            <div>
+              <label for="country">{{ 'CHECKOUT.COUNTRY' | translate }}</label>
+              <input id="country" type="text" [(ngModel)]="address.country" name="country" />
+            </div>
+            <div>
+              <label for="phone">{{ 'CHECKOUT.PHONE' | translate }}</label>
+              <input id="phone" type="tel" [(ngModel)]="address.phone" name="phone" required />
+            </div>
+          </div>
+        </form>
+        <div class="step-actions">
+          <button type="button" class="btn-secondary" (click)="prevStep()">{{ 'CHECKOUT.BACK' | translate }}</button>
+          <button type="button" class="btn-primary" [disabled]="!isAddressValid()" (click)="nextStep()">
+            {{ 'CHECKOUT.CONTINUE_PAYMENT' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment -->
+      <div class="step-content" *ngIf="step === 3">
+        <div class="payment-options">
+          <label class="payment-option" [class.selected]="paymentMethod === 'card'">
+            <input type="radio" name="payment" value="card" [(ngModel)]="paymentMethod" />
+            <i class="pi pi-credit-card"></i>
+            <span>{{ 'CHECKOUT.PAY_CARD' | translate }}</span>
+          </label>
+          <label class="payment-option" [class.selected]="paymentMethod === 'paypal'">
+            <input type="radio" name="payment" value="paypal" [(ngModel)]="paymentMethod" />
+            <i class="pi pi-paypal"></i>
+            <span>PayPal</span>
+          </label>
+          <label class="payment-option" [class.selected]="paymentMethod === 'transfer'">
+            <input type="radio" name="payment" value="transfer" [(ngModel)]="paymentMethod" />
+            <i class="pi pi-building"></i>
+            <span>{{ 'CHECKOUT.PAY_TRANSFER' | translate }}</span>
+          </label>
+        </div>
+        <div class="step-actions step-actions--payment">
+          <button type="button" class="btn-secondary" (click)="prevStep()">{{ 'CHECKOUT.BACK' | translate }}</button>
+          <button type="button" class="btn-primary btn-pay" (click)="placeOrder()">
+            <i class="pi pi-lock"></i> {{ 'CHECKOUT.PLACE_ORDER' | translate }} — {{ formatPrice(total) }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order summary sidebar -->
+    <aside class="order-summary" *ngIf="step < 4">
+      <h3>{{ 'CHECKOUT.SUMMARY' | translate }}</h3>
+
+      <div class="coupon-box">
+        <label class="coupon-label" for="couponCode">
+          <i class="pi pi-tag"></i> {{ 'CHECKOUT.COUPON_TITLE' | translate }}
+        </label>
+        <p class="coupon-hint">{{ 'CHECKOUT.COUPON_HINT' | translate }}</p>
+
+        <div class="coupon-applied" *ngIf="couponApplied">
+          <div class="coupon-badge">
+            <code>MOTO10</code>
+            <span>{{ 'CHECKOUT.COUPON_APPLIED' | translate }}</span>
+          </div>
+          <button type="button" class="coupon-remove" (click)="removeCoupon()">
+            {{ 'CHECKOUT.COUPON_REMOVE' | translate }}
+          </button>
+        </div>
+
+        <div class="coupon-form" *ngIf="!couponApplied">
+          <input
+            id="couponCode"
+            type="text"
+            [(ngModel)]="couponInput"
+            name="couponCode"
+            [placeholder]="'CHECKOUT.COUPON_PLACEHOLDER' | translate"
+            (keydown)="onCouponKeydown($event)"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button type="button" class="btn-coupon" (click)="applyCoupon()">
+            {{ 'CHECKOUT.COUPON_APPLY' | translate }}
+          </button>
+        </div>
+        <p class="coupon-error" *ngIf="couponError">{{ couponError | translate }}</p>
+      </div>
+
+      <div class="summary-lines">
+        <div class="summary-line">
+          <span>{{ 'CHECKOUT.SUBTOTAL' | translate }}</span>
+          <span>{{ formatPrice(subtotal) }}</span>
+        </div>
+        <div class="summary-line discount" *ngIf="couponApplied && discount > 0">
+          <span>{{ 'CHECKOUT.COUPON_DISCOUNT' | translate }}</span>
+          <span>−{{ formatPrice(discount) }}</span>
+        </div>
+        <div class="summary-line">
+          <span>{{ 'CHECKOUT.SHIPPING' | translate }}</span>
+          <span>{{ shipping === 0 ? ('CHECKOUT.FREE' | translate) : formatPrice(shipping) }}</span>
+        </div>
+        <div class="summary-line total">
+          <span>{{ 'CHECKOUT.TOTAL' | translate }}</span>
+          <span>{{ formatPrice(total) }}</span>
+        </div>
+      </div>
+
+      <p class="free-shipping-hint" *ngIf="shipping > 0">
+        {{ 'CHECKOUT.FREE_SHIPPING_HINT' | translate }}
+      </p>
+    </aside>
+  </div>
+</div>
+
+<!-- Order confirmation -->
+<div class="confirmation" *ngIf="orderComplete && completedOrder">
+  <div class="confirmation-card">
+    <i class="pi pi-check-circle"></i>
+    <h1>{{ 'CHECKOUT.CONFIRMED' | translate }}</h1>
+    <p>{{ 'CHECKOUT.CONFIRMED_MSG' | translate }}</p>
+    <p class="order-id">{{ 'CHECKOUT.ORDER_ID' | translate }}: <strong>{{ completedOrder.id }}</strong></p>
+    <p class="order-total">{{ formatPrice(completedOrder.total) }}</p>
+    <div class="confirmation-actions">
+      <a routerLink="/catalog" class="btn-primary">{{ 'CHECKOUT.CONTINUE_SHOPPING' | translate }}</a>
+      <a routerLink="/profile" class="btn-secondary">{{ 'CHECKOUT.VIEW_ORDERS' | translate }}</a>
+    </div>
+  </div>
+</div>

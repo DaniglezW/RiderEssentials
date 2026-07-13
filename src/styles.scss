@@ -2,30 +2,81 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 
-
 :root {
+  --re-accent: #dc2626;
+  --re-accent-dark: #b91c1c;
+  --re-dark: #111111;
+  --re-dark-secondary: #1a1a1a;
+  --re-bg: #f4f4f5;
+  --re-text: #18181b;
+  --re-text-muted: #71717a;
+  --re-border: #e4e4e7;
+  --re-success: #16a34a;
+  --re-danger: #dc2626;
+  --re-warning: #f59e0b;
+  --re-radius: 10px;
+  --re-radius-lg: 16px;
+  --re-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --re-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --re-font: 'Segoe UI', system-ui, -apple-system, sans-serif;
   --base-background-lightblue: #ecf1fa;
-  --base-font-size-lots-review: 0.64rem;
-  --base-font-size-lots-review-1800: 0.90rem;
-  --base-font-size-lots-review-1550: 0.86rem;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--re-font);
+  background: var(--re-bg);
+  color: var(--re-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
 }
 
 .repasoTooltip {
   max-width: inherit;
 }
 
-body {
-    margin: 0;
+.btn-primary {
+  background: var(--re-accent);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover { background: var(--re-accent-dark); }
 }
 
-body::-webkit-scrollbar {
-  display: none;
+.btn-secondary {
+  background: #fff;
+  color: var(--re-text);
+  border: 1px solid var(--re-border);
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-body {
-  scrollbar-width: none;
-}
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 
-body {
-  -ms-overflow-style: none;
+  &--new { background: #dbeafe; color: #1d4ed8; }
+  &--bestseller { background: #fef3c7; color: #b45309; }
+  &--sale { background: var(--re-accent); color: #fff; }
+  &--stock { background: #dcfce7; color: #15803d; }
+  &--nostock { background: #fee2e2; color: #b91c1c; }
 }

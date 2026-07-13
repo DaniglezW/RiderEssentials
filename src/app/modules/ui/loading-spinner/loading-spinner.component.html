@@ -1,0 +1,11 @@
+<div class="re-loader-wrap" [style.min-height]="minHeight">
+  <div class="re-loader" role="status" aria-live="polite">
+    <div class="re-loader__wheel" aria-hidden="true">
+      <span class="re-loader__spoke"></span>
+      <span class="re-loader__spoke"></span>
+      <span class="re-loader__spoke"></span>
+      <span class="re-loader__hub"></span>
+    </div>
+    <p class="re-loader__message" *ngIf="message">{{ message }}</p>
+  </div>
+</div>

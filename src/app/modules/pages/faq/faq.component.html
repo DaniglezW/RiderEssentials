@@ -1,0 +1,23 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ 'FAQ.TITLE' | translate }}</h1>
+    <p>{{ 'FAQ.SUBTITLE' | translate }}</p>
+  </div>
+
+  <div class="faq-list">
+    <div class="faq-item" *ngFor="let faq of faqs" [class.open]="faq.open">
+      <button class="faq-question" (click)="toggle(faq)">
+        <span>{{ faq.questionKey | translate }}</span>
+        <i class="pi" [ngClass]="faq.open ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
+      </button>
+      <div class="faq-answer" *ngIf="faq.open">
+        <p>{{ faq.answerKey | translate }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-cta">
+    <p>{{ 'FAQ.STILL_QUESTIONS' | translate }}</p>
+    <a routerLink="/contact" class="btn-primary">{{ 'FAQ.CONTACT_US' | translate }}</a>
+  </div>
+</div>

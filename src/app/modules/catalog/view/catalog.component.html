@@ -1,9 +1,39 @@
-<div class="catalog-hero">
-  <div class="hero-content">
+<div class="catalog-hero" [class.catalog-hero--personalized]="primaryBike">
+  <div class="hero-content" *ngIf="!primaryBike">
     <h1>{{ 'CATALOG.HERO_TITLE' | translate }}</h1>
     <p>{{ 'CATALOG.HERO_SUBTITLE' | translate }}</p>
     <a routerLink="/garage" class="hero-cta">
       <i class="pi pi-flag"></i> {{ 'CATALOG.HERO_CTA' | translate }}
+    </a>
+  </div>
+
+  <div class="hero-content hero-content--personalized" *ngIf="primaryBike">
+    <span class="hero-badge">
+      <i class="pi pi-flag-fill"></i>
+      {{ primaryBike.make }} {{ primaryBike.model }} · {{ primaryBike.year }}
+    </span>
+    <h1>
+      <ng-container *ngIf="primaryBike.nickname; else bikeTitle">
+        {{ 'CATALOG.HERO_TITLE_NICKNAME' | translate: { nickname: primaryBike.nickname } }}
+      </ng-container>
+      <ng-template #bikeTitle>
+        {{ 'CATALOG.HERO_TITLE_BIKE' | translate: { make: primaryBike.make, model: primaryBike.model } }}
+      </ng-template>
+    </h1>
+    <p>
+      <ng-container *ngIf="primaryBike.nickname; else bikeSubtitle">
+        {{ 'CATALOG.HERO_SUBTITLE_NICKNAME' | translate: {
+          make: primaryBike.make,
+          model: primaryBike.model,
+          year: primaryBike.year
+        } }}
+      </ng-container>
+      <ng-template #bikeSubtitle>
+        {{ 'CATALOG.HERO_SUBTITLE_BIKE' | translate }}
+      </ng-template>
+    </p>
+    <a routerLink="/garage" class="hero-cta hero-cta--secondary">
+      <i class="pi pi-cog"></i> {{ 'CATALOG.HERO_CTA_GARAGE' | translate }}
     </a>
   </div>
 </div>

@@ -6,6 +6,8 @@ import { Product } from '../../../model/product';
 import { ProductSearchService } from '../../../services/productSearchService.service';
 import { ProductService } from '../../product/services/productService.service';
 import { PageStateService } from '@/app/core/services/page-state.service';
+import { GarageService } from '@/app/services/garage.service';
+import { Motorcycle } from '@/app/model/motorcycle';
 import { Subscription, timer } from 'rxjs';
 
 type SortOption = 'default' | 'price-asc' | 'price-desc' | 'name';
@@ -29,14 +31,19 @@ export class CatalogComponent implements OnInit {
   sortBy: SortOption = 'default';
   max = 5000;
   min = 0;
+  primaryBike: Motorcycle | null = null;
 
   constructor(
     private catalogService: CatalogService,
     private productSearchService: ProductSearchService,
-    private productService: ProductService
+    private productService: ProductService,
+    private garageService: GarageService
   ) {}
 
   ngOnInit(): void {
+    this.garageService.getBikes().subscribe((bikes) => {
+      this.primaryBike = bikes.find((b) => b.isPrimary) || bikes[0] || null;
+    });
     this.productSearchService.currentProducts.subscribe((response) => {
       if (response) this.products = response;
     });
